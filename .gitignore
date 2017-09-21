@@ -1,0 +1,5 @@
+/composer.lock
+/debian/php-ipex-b2b.debhelper.log
+/debian/revision
+/debian/version
+/vendor/

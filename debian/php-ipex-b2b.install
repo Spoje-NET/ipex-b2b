@@ -1,0 +1,2 @@
+src/IPEXB2B/*.php           /usr/share/php/IPEXB2B
+debian/composer.json        /usr/share/php/IPEXB2B
