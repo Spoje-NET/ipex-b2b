@@ -11,8 +11,8 @@ build: doc
 	echo build
 
 clean:
-	rm -rf debian/flexipeehp
-	rm -rf debian/flexipeehp-doc
+	rm -rf debian/php-ipex-b2b
+	rm -rf debian/php-ipex-b2b-doc
 	rm -rf debian/*.log
 	rm -rf docs/*
 

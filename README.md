@@ -3,7 +3,7 @@
 
 
 
-CZ: PHP Knihovna pro snadnou práci s Rest API [IPEX](https://restapi.ipex.cz/documentation)
+CZ: PHP Knihovna pro snadnou práci s Rest API [IPEX B2B](https://restapi.ipex.cz/documentation)
 
 [![Source Code](http://img.shields.io/badge/source/Spoje-NET/ipex-b2b-blue.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b)
 [![Latest Version](https://img.shields.io/github/release/Spoje-NET/ipex-b2b.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b/releases)
@@ -13,8 +13,6 @@ CZ: PHP Knihovna pro snadnou práci s Rest API [IPEX](https://restapi.ipex.cz/do
 [![Docker pulls](https://img.shields.io/docker/pulls/vitexsoftware/ipex-b2b.svg)](https://hub.docker.com/r/vitexsoftware/ipex-b2b/)
 [![Total Downloads](https://img.shields.io/packagist/dt/spoje.net/ipex-b2b.svg?style=flat-square)](https://packagist.org/packages/spoje.net/ipex-b2b)
 [![Latest stable](https://img.shields.io/packagist/v/spoje.net/ipex-b2b.svg?style=flat-square)](https://packagist.org/packages/spoje.net/ipex-b2b)
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5ba2e106-1590-4d0b-bbb2-953484ca36d4/big.png)](https://insight.sensiolabs.com/projects/5ba2e106-1590-4d0b-bbb2-953484ca36d4)
 
 # Poděkování 
 Vznik této knihovny by nebyl možný bez laskavé podpory společnosti [Spoje.Net](http://www.spoje.net), 
@@ -28,7 +26,7 @@ knihovny do vašich projektů.
 Instalace
 ---------
 
-    composer require spoje.net/ipex-b2b
+    composer require spoje.net/ipexb2b
 
 Konfigurace
 -----------

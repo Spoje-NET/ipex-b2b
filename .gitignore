@@ -3,3 +3,6 @@
 /debian/revision
 /debian/version
 /vendor/
+/debian/debhelper-build-stamp
+/debian/files
+/debian/php-ipex-b2b.substvars
