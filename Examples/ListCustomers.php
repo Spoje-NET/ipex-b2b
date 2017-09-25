@@ -12,12 +12,11 @@ namespace Example\IPEXB2B;
 include_once './config.php';
 include_once '../vendor/autoload.php';
 
-$client   = new \IPEXB2B\ApiClient(null, ['section' => 'services']);
-$response = $client->requestData('list');
-
+$customers = new \IPEXB2B\Customers();
+$response  = $customers->requestData();
 if (count($response)) {
-    $client->addStatusMessage('Connection OK', 'success');
-    $client->addStatusMessage('token:'.$client->getTokenString(), 'debug');
+        var_dump($response);
+    $customers->addStatusMessage('Customers OK', 'success');
 } else {
-    $client->addStatusMessage('Connection failed', 'warning');
+    $customers->addStatusMessage('Obtaining Customers failed', 'warning');
 }

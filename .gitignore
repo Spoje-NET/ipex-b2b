@@ -6,3 +6,5 @@
 /debian/debhelper-build-stamp
 /debian/files
 /debian/php-ipex-b2b.substvars
+/debian/php-ipex-b2b/
+/docs/

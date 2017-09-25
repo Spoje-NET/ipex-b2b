@@ -26,11 +26,16 @@ class Token extends ApiClient
      * Sekce užitá objektem.
      * Section used by object
      *
-     * @link https://demo.ipex.eu/c/demo/evidence-list Přehled evidencí
      * @var string
      */
     public $section = 'token';
 
+    /**
+     * Token
+     *
+     * @param mixed $init
+     * @param array $options
+     */
     public function __construct($init = null, $options = array())
     {
         parent::__construct($init, $options);

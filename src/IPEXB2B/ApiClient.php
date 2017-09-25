@@ -20,7 +20,7 @@ class ApiClient extends \Ease\Brick
      *
      * @var string
      */
-    public static $libVersion = '0.1';
+    public static $libVersion = '0.1.3';
 
     /**
      * Verze protokolu použitého pro komunikaci.
@@ -440,8 +440,6 @@ class ApiClient extends \Ease\Brick
     /**
      * Return basic URL for used Evidence
      *
-     * @link https://www.ipex.eu/api/dokumentace/ref/urls/ Sestavování URL
-     *
      * @return string Evidence URL
      */
     public function getSectionURL()
@@ -604,7 +602,7 @@ class ApiClient extends \Ease\Brick
 
         $httpHeaders = $this->defaultHttpHeaders;
         if (!is_null($this->tokener)) {
-            $httpHeaders['Authorization'] = $this->tokener->getTokenString();
+            $httpHeaders['Authorization'] = $this->getTokenString();
         }
 
         $formats = ['json' => ['content-type' => 'application/json']];
@@ -707,6 +705,16 @@ class ApiClient extends \Ease\Brick
         return \DateTime::createFromFormat('Y-m-d H:i:s.u',
                 str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)));
         \DateTime::getLastErrors();
+    }
+
+    /**
+     * Current Token String
+     *
+     * @return string
+     */
+    public function getTokenString()
+    {
+        return $this->tokener->getTokenString();
     }
 
     /**

@@ -13,7 +13,7 @@ namespace IPEXB2B;
  *
  * @url https://restapi.ipex.cz/documentation#/
  */
-class Rights extends ApiClient
+class Customers extends ApiClient
 {
     /**
      * Sekce užitá objektem.
@@ -21,6 +21,6 @@ class Rights extends ApiClient
      *
      * @var string
      */
-    public $section = 'rights';
-  
+    public $section = 'customers';
+
 }

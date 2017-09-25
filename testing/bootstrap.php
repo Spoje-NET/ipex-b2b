@@ -27,8 +27,8 @@ define('IPEX_URL', 'https://restapi.ipex.cz');
 /*
  * Uživatel ipex-b2b API
  */
-define('IPEX_LOGIN', 'spoje.net');
+define('IPEX_LOGIN', 'spojenet_api');
 /*
  * Heslo ipex-b2b API
  */
-define('IPEX_PASSWORD', 'xxxxx.xxx');
+define('IPEX_PASSWORD', 'DKfl5e8T');
