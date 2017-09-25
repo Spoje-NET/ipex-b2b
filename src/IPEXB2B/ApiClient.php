@@ -243,6 +243,12 @@ class ApiClient extends \Ease\Brick
     ];
 
     /**
+     * Save 404 results to log ?
+     * @var boolean
+     */
+    protected $ignoreNotFound = false;
+
+    /**
      * Array of errors caused by last request
      * @var array
      */
@@ -338,15 +344,8 @@ class ApiClient extends \Ease\Brick
      */
     public function processInit($init)
     {
-        if (is_integer($init)) {
+        if (empty($init) == false) {
             $this->loadFromIPEX($init);
-        } elseif (is_array($init)) {
-            $this->takeData($init);
-        } elseif (preg_match('/\.(json|xml|csv)/', $init)) {
-            $this->takeData($this->getFlexiData((($init[0] != '/') ? $this->getSectionURL($init)
-                            : $init)));
-        } else {
-            $this->loadFromIPEX('code:'.str_replace('code:', '', $init));
         }
     }
 
@@ -550,6 +549,9 @@ class ApiClient extends \Ease\Brick
 
             case 500: // Internal Server Error
             case 404: // Page not found
+                if ($this->ignoreNotFound === true) {
+                    break;
+                }
             case 400: //Bad Request parameters
             default: //Something goes wrong
                 $this->addStatusMessage($this->curlInfo['url'], 'warning');
@@ -669,6 +671,11 @@ class ApiClient extends \Ease\Brick
         return $arr;
     }
 
+    public function loadFromIPEX($key)
+    {
+        return $this->takeData($this->requestData($key));
+    }
+
     /**
      * Write Operation Result.
      *
@@ -715,6 +722,21 @@ class ApiClient extends \Ease\Brick
     public function getTokenString()
     {
         return $this->tokener->getTokenString();
+    }
+
+    /**
+     * Set or get ignore not found pages flag
+     *
+     * @param boolean $ignore set flag to
+     *
+     * @return boolean get flag state
+     */
+    public function ignore404($ignore = null)
+    {
+        if (!is_null($ignore)) {
+            $this->ignoreNotFound = $ignore;
+        }
+        return $this->ignoreNotFound;
     }
 
     /**
