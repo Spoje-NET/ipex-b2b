@@ -751,6 +751,15 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
+     * Reconnect After unserialization
+     */
+    public function __wakeup()
+    {
+        parent::__wakeup();
+        $this->curlInit();
+    }
+
+    /**
      * Disconnect CURL befere pass away
      */
     public function __destruct()
