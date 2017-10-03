@@ -554,7 +554,8 @@ class ApiClient extends \Ease\Brick
                 }
             case 400: //Bad Request parameters
             default: //Something goes wrong
-                $this->addStatusMessage($this->curlInfo['url'], 'warning');
+                $this->addStatusMessage($responseCode.': '.$this->curlInfo['url'],
+                    'warning');
                 if (is_array($responseDecoded)) {
                     $this->parseError($responseDecoded);
                 }
