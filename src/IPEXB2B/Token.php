@@ -65,7 +65,6 @@ class Token extends ApiClient
         return $this->getDataValue('accessToken');
     }
 
-
     /**
      * Check Access Token expiration state
      *
@@ -80,10 +79,15 @@ class Token extends ApiClient
 
     public function getToken()
     {
+        if (empty($this->user)) {
+            throw new \Ease\Exception(_('Username not set!'));
+        }
+        if (empty($this->password)) {
+            throw new \Ease\Exception(_('Password not set!'));
+        }
         $this->setPostFields(json_encode(['username' => $this->user, 'password' => $this->password]));
         return $this->requestData(null, 'POST');
     }
-
 
     /**
      * Pri vytvareni objektu pomoci funkce singleton (ma stejne parametry, jako konstruktor)
