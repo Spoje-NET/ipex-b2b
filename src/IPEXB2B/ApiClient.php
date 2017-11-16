@@ -462,10 +462,46 @@ class ApiClient extends \Ease\Brick
     {
         $sectionUrl = $this->getSectionURL();
         if (!empty($urlSuffix)) {
-            $sectionUrl .= '/';
+            if ($urlSuffix[0] != '?') {
+                $sectionUrl .= '/';
+            }
             $sectionUrl .= $urlSuffix;
         }
         return $sectionUrl;
+    }
+
+    /**
+     * Add params to url
+     *
+     * @param string  $url      originall url
+     * @param array   $params   value to add
+     * @param boolean $override replace already existing values ?
+     *
+     * @return string url with parameters added
+     */
+    public function addUrlParams($url, $params, $override = false)
+    {
+        $urlParts = parse_url($url);
+        $urlFinal = '';
+        if (array_key_exists('scheme', $urlParts)) {
+            $urlFinal .= $urlParts['scheme'].'://'.$urlParts['host'];
+        }
+        if (array_key_exists('path', $urlParts)) {
+            $urlFinal .= $urlParts['path'];
+        }
+        if (array_key_exists('query', $urlParts)) {
+            parse_str($urlParts['query'], $queryUrlParams);
+            $urlParams = $override ? array_merge($params, $queryUrlParams) : array_merge($queryUrlParams,
+                    $params);
+        } else {
+            $urlParams = $params;
+        }
+        if (!empty($urlParams) && is_array($urlParams)) {
+            $urlFinal .= '?'.http_build_query($urlParams);
+        } else {
+            $urlFinal .= '?'.$urlParams;
+        }
+        return $urlFinal;
     }
 
     /**
@@ -554,7 +590,8 @@ class ApiClient extends \Ease\Brick
                 }
             case 400: //Bad Request parameters
             default: //Something goes wrong
-                $this->addStatusMessage($this->curlInfo['url'], 'warning');
+                $this->addStatusMessage($responseCode.': '.$this->curlInfo['url'],
+                    'warning');
                 if (is_array($responseDecoded)) {
                     $this->parseError($responseDecoded);
                 }
@@ -568,18 +605,20 @@ class ApiClient extends \Ease\Brick
      * Parse error message response
      *
      * @param array $responseDecoded
+     *
      * @return int number of errors processed
      */
     public function parseError(array $responseDecoded)
     {
+        $message = $responseDecoded['statusCode'].': ';
         if (array_key_exists('error', $responseDecoded)) {
-            $this->errors = $responseDecoded['error'];
+            $message .= $responseDecoded['error'];
         }
         if (array_key_exists('message', $responseDecoded)) {
-            $this->errors = [['message' => $responseDecoded['message']]];
+            $message .= ' '.$responseDecoded['message'];
         }
-
-        return count($this->errors);
+        $this->addStatusMessage($message, 'error');
+        return 1;
     }
 
     /**
@@ -673,7 +712,8 @@ class ApiClient extends \Ease\Brick
 
     public function loadFromIPEX($key)
     {
-        return $this->takeData($this->requestData($key));
+        return $this->takeData($this->requestData(is_array($key) ? $this->addUrlParams(null,
+                        $key) : $key));
     }
 
     /**
