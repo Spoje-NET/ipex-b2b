@@ -94,7 +94,7 @@ novou třídu pro sekci "simcards" bude vypadat takto:
     }
 ```
 
-A poté je již snadné si simkarty na 2 řádky:
+A poté je již snadné si simkarty na 2 řádky vypsat:
     
 ```php
     $jednotky = new Simcards();

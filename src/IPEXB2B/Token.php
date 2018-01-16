@@ -73,7 +73,11 @@ class Token extends ApiClient
     public function isExpired()
     {
         $expire = $this->ipexDateTimeToDateTime($this->getDataValue('expire'));
+        if(is_object($expire)){
         $tdiff  = $expire->getTimestamp() - time();
+        } else {
+            $tdiff = 0;
+        }
         return $tdiff < 5;
     }
 

@@ -1,7 +1,5 @@
-php-ipex-b2b (0.1-0) UNRELEASED; urgency=low
+php-ipex-b2b (0.1-2) UNRELEASED; urgency=low
 
-  [ Vítězslav Vitex Dvořák ]
+  * Better Error Parsing
 
-    Initial release
-
- -- vitex <vitex@developer.kancl.brevnov.czf>  Tue, 04 Oct 2016 20:17:10 +0200
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Thu, 16 Nov 2017 21:24:24 +0100
