@@ -327,8 +327,6 @@ class ApiClient extends \Ease\Brick
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false); // IPEX by default uses Self-Signed certificates
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($this->curl, CURLOPT_VERBOSE, ($this->debug === true)); // For debugging
-        curl_setopt($this->curl, CURLOPT_USERPWD,
-            $this->user.':'.$this->password); // set username and password
     }
 
     /**
