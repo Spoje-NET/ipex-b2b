@@ -7,8 +7,7 @@ fresh:
 install: build
 	echo install
 	
-build: doc
-	dch -b -i --package ipex-b2b "`git log -n 1 | tail -n+5`"
+build:
 	echo build
 
 clean:
@@ -25,6 +24,7 @@ test:
 	phpunit --bootstrap testing/bootstrap.php
 
 deb:
+	dch -b -i "`git log -n 1 | tail -n+5`"
 	debuild -i -us -uc -b
 
 .PHONY : install
