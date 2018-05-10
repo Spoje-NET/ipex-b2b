@@ -15,7 +15,7 @@ clean:
 	rm -rf debian/php-ipex-b2b-doc
 	rm -rf debian/*.log
 	rm -rf docs/*
-	rm -rf vendor/*
+	rm -rf vendor/* composer.lock
 
 doc:
 	debian/apigendoc.sh

@@ -18,7 +18,7 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new ApiClient;
+        $this->object = new ApiClient();
     }
 
     /**
@@ -27,328 +27,197 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
+        
     }
 
     /**
      * @covers IPEXB2B\ApiClient::setUp
-     * @todo   Implement testSetUp().
      */
     public function testSetUp()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $this->object->setUp(
+            [
+                'url' => 'url',
+                'user' => 'usr',
+                'password' => 'pwd',
+                'section' => 'sec',
+                'debug' => true,
+                'defaultUrlParams' => ['limit' => 10],
+                'ignore404' => true,
+                'offline' => true
+            ]
         );
-    }
-
-    /**
-     * @covers IPEXB2B\ApiClient::setupProperty
-     * @todo   Implement testSetupProperty().
-     */
-    public function testSetupProperty()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertEquals('url', $this->object->url);
+        $this->assertEquals('usr', $this->object->user);
+        $this->assertEquals('sec', $this->object->section);
+        $this->assertEquals('pwd', $this->object->password);
     }
 
     /**
      * @covers IPEXB2B\ApiClient::curlInit
-     * @todo   Implement testCurlInit().
      */
     public function testCurlInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->curlInit();
+        $this->assertTrue(is_resource($this->object->curl));
     }
 
     /**
      * @covers IPEXB2B\ApiClient::processInit
-     * @todo   Implement testProcessInit().
      */
     public function testProcessInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->processInit(1);
+        $this->object->processInit(['id' => 1]);
     }
 
     /**
      * @covers IPEXB2B\ApiClient::setSection
-     * @todo   Implement testSetSection().
-     */
-    public function testSetSection()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers IPEXB2B\ApiClient::getSection
-     * @todo   Implement testGetSection().
      */
-    public function testGetSection()
+    public function testSection()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IPEXB2B\ApiClient::object2array
-     * @todo   Implement testObject2array().
-     */
-    public function testObject2array()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IPEXB2B\ApiClient::objectToID
-     * @todo   Implement testObjectToID().
-     */
-    public function testObjectToID()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->setSection('tested');
+        $this->assertEquals('tested', $this->object->getSection());
     }
 
     /**
      * @covers IPEXB2B\ApiClient::setPostFields
-     * @todo   Implement testSetPostFields().
      */
     public function testSetPostFields()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertEquals('test', $this->object->setPostFields('test'));
     }
 
     /**
      * @covers IPEXB2B\ApiClient::getSectionURL
-     * @todo   Implement testGetSectionURL().
      */
     public function testGetSectionURL()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->getSectionURL();
     }
 
     /**
-     * @covers IPEXB2B\ApiClient::sectionUrlWithSuffix
-     * @todo   Implement testSectionUrlWithSuffix().
+     * @covers IPEXB2B\ApiClient::setUrlParams
      */
-    public function testSectionUrlWithSuffix()
+    public function testSetUrlParams()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IPEXB2B\ApiClient::addUrlParams
-     */
-    public function testAddUrlParams()
-    {
-        $this->assertEquals('http://vitexsoftware.cz/path?id=1&a=b',
-            $this->object->addUrlParams('http://vitexsoftware.cz/path?a=b',
-                ['id' => 1], TRUE));
+        $this->assertEquals(['a' => 'b'],
+            $this->object->setUrlParams(['a' => 'b']));
+        $this->assertEquals(['a' => 'b', 'd' => 'e'],
+            $this->object->setUrlParams(['d' => 'e']));
     }
 
     /**
      * @covers IPEXB2B\ApiClient::updateApiURL
-     * @todo   Implement testUpdateApiURL().
      */
     public function testUpdateApiURL()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->updateApiURL();
     }
 
     /**
      * @covers IPEXB2B\ApiClient::requestData
-     * @todo   Implement testRequestData().
      */
     public function testRequestData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->requestData();
     }
 
     /**
      * @covers IPEXB2B\ApiClient::rawResponseToArray
-     * @todo   Implement testRawResponseToArray().
      */
     public function testRawResponseToArray()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->rawResponseToArray('{}');
     }
 
     /**
      * @covers IPEXB2B\ApiClient::parseResponse
-     * @todo   Implement testParseResponse().
      */
     public function testParseResponse()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->parseResponse([], 200);
     }
 
     /**
      * @covers IPEXB2B\ApiClient::parseError
-     * @todo   Implement testParseError().
      */
     public function testParseError()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->parseError(['statusCode' => '200', 'error' => 'OK', 'message' => 'tested']);
     }
 
     /**
      * @covers IPEXB2B\ApiClient::doCurlRequest
-     * @todo   Implement testDoCurlRequest().
      */
     public function testDoCurlRequest()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IPEXB2B\ApiClient::xml2array
-     * @todo   Implement testXml2array().
-     */
-    public function testXml2array()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->doCurlRequest($this->object->apiURL,'GET');
     }
 
     /**
      * @covers IPEXB2B\ApiClient::loadFromIPEX
-     * @todo   Implement testLoadFromIPEX().
      */
     public function testLoadFromIPEX()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->loadFromIPEX('');
     }
 
     /**
      * @covers IPEXB2B\ApiClient::logResult
-     * @todo   Implement testLogResult().
      */
     public function testLogResult()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->logResult(['statusCode' => '200', 'error' => 'OK', 'message' => 'tested']);
     }
 
     /**
      * @covers IPEXB2B\ApiClient::ipexDateTimeToDateTime
-     * @todo   Implement testIpexDateTimeToDateTime().
      */
     public function testIpexDateTimeToDateTime()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $phpDateTime = ApiClient::ipexDateTimeToDateTime('2018-04-30T23:59:59.000Z');
+        $this->assertEquals('1525125599', $phpDateTime->format('U'));
     }
 
     /**
      * @covers IPEXB2B\ApiClient::getTokenString
-     * @todo   Implement testGetTokenString().
      */
     public function testGetTokenString()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNotEmpty($this->object->getTokenString());
     }
 
     /**
      * @covers IPEXB2B\ApiClient::ignore404
-     * @todo   Implement testIgnore404().
      */
     public function testIgnore404()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertTrue($this->object->ignore404(true));
     }
 
     /**
      * @covers IPEXB2B\ApiClient::disconnect
-     * @todo   Implement testDisconnect().
      */
     public function testDisconnect()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->disconnect();
     }
 
     /**
      * @covers IPEXB2B\ApiClient::__wakeup
-     * @todo   Implement test__wakeup().
      */
     public function test__wakeup()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->__wakeup();
     }
 
     /**
      * @covers IPEXB2B\ApiClient::__destruct
-     * @todo   Implement test__destruct().
      */
     public function test__destruct()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->__destruct();
     }
 }

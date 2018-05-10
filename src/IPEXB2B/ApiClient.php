@@ -249,11 +249,10 @@ class ApiClient extends \Ease\Brick
     protected $ignoreNotFound = false;
 
     /**
-     * Array of errors caused by last request
-     * @var array
+     * Token handling object live here
+     * @var Token 
      */
-    private $errors    = [];
-    protected $tokener = null;
+    protected $tokener        = null;
 
     /**
      * Class for read only interaction with IPEX.
@@ -298,24 +297,6 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * Set up one of properties
-     *
-     * @param array  $options  array of given properties
-     * @param string $name     name of property to process
-     * @param string $constant load default property value from constant
-     */
-    public function setupProperty($options, $name, $constant = null)
-    {
-        if (isset($options[$name])) {
-            $this->$name = $options[$name];
-        } else {
-            if (is_null($this->$name) && !empty($constant) && defined($constant)) {
-                $this->$name = constant($constant);
-            }
-        }
-    }
-
-    /**
      * Inicializace CURL
      */
     public function curlInit()
@@ -352,6 +333,7 @@ class ApiClient extends \Ease\Brick
      * Set section for communication
      *
      * @param string $section section pathName to use
+     * 
      * @return boolean section switching status
      */
     public function setSection($section)
@@ -372,66 +354,15 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * Převede rekurzivně Objekt na pole.
-     *
-     * @param object|array $object
-     *
-     * @return array
-     */
-    public static function object2array($object)
-    {
-        $result = null;
-        if (is_object($object)) {
-            $objectData = get_object_vars($object);
-            if (is_array($objectData) && count($objectData)) {
-                $result = array_map('self::object2array', $objectData);
-            }
-        } else {
-            if (is_array($object)) {
-                foreach ($object as $item => $value) {
-                    $result[$item] = self::object2array($value);
-                }
-            } else {
-                $result = $object;
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Převede rekurzivně v poli všechny objekty na jejich identifikátory.
-     *
-     * @param object|array $object
-     *
-     * @return array
-     */
-    public static function objectToID($object)
-    {
-        $resultID = null;
-        if (is_object($object)) {
-            $resultID = $object->__toString();
-        } else {
-            if (is_array($object)) {
-                foreach ($object as $item => $value) {
-                    $resultID[$item] = self::objectToID($value);
-                }
-            } else { //String
-                $resultID = $object;
-            }
-        }
-
-        return $resultID;
-    }
-
-    /**
      * Připraví data pro odeslání do FlexiBee
      *
      * @param string $data
+     * 
+     * @return string Data strored
      */
     public function setPostFields($data)
     {
-        $this->postFields = $data;
+        return $this->postFields = $data;
     }
 
     /**
@@ -468,39 +399,23 @@ class ApiClient extends \Ease\Brick
         return $sectionUrl;
     }
 
-    /**
-     * Add params to url
-     *
-     * @param string  $url      originall url
-     * @param array   $params   value to add
-     * @param boolean $override replace already existing values ?
-     *
-     * @return string url with parameters added
-     */
-    public function addUrlParams($url, $params, $override = false)
-    {
-        $urlParts = parse_url($url);
-        $urlFinal = '';
-        if (array_key_exists('scheme', $urlParts)) {
-            $urlFinal .= $urlParts['scheme'].'://'.$urlParts['host'];
-        }
-        if (array_key_exists('path', $urlParts)) {
-            $urlFinal .= $urlParts['path'];
-        }
-        if (array_key_exists('query', $urlParts)) {
-            parse_str($urlParts['query'], $queryUrlParams);
-            $urlParams = $override ? array_merge($params, $queryUrlParams) : array_merge($queryUrlParams,
-                    $params);
+
+/**
+ * Add UrlParams to Requests URL
+ * 
+ * @param array $urlParams
+ * 
+ * @return array all urlParams
+ */    
+    public function setUrlParams($urlParams){
+        if(is_array($this->urlParams)){
+            $this->urlParams = array_merge($this->urlParams, $urlParams);
         } else {
-            $urlParams = $params;
+            $this->urlParams = $urlParams;
         }
-        if (!empty($urlParams) && is_array($urlParams)) {
-            $urlFinal .= '?'.http_build_query($urlParams);
-        } else {
-            $urlFinal .= '?'.$urlParams;
-        }
-        return $urlFinal;
+        return $this->urlParams;
     }
+
 
     /**
      * Update $this->apiURL
@@ -526,13 +441,13 @@ class ApiClient extends \Ease\Brick
 
         if (preg_match('/^http/', $urlSuffix)) {
             $url = $urlSuffix;
-        } elseif ($urlSuffix[0] == '/') {
+        } elseif (strlen ($urlSuffix) && ($urlSuffix[0] == '/')) {
             $url = $this->url.$urlSuffix;
         } else {
             $url = $this->sectionUrlWithSuffix($urlSuffix);
         }
 
-        $responseCode = $this->doCurlRequest($url, $method, $format);
+        $responseCode = $this->doCurlRequest( \Ease\Shared::addUrlParams( $url, $this->urlParams ), $method, $format);
 
         return strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray($this->lastCurlResponse,
                     $this->responseMimeType), $responseCode) : null;
@@ -622,10 +537,10 @@ class ApiClient extends \Ease\Brick
     /**
      * Vykonej HTTP požadavek
      *
-     * @link https://www.ipex.eu/api/dokumentace/ref/urls/ Sestavování URL
      * @param string $url    URL požadavku
      * @param string $method HTTP Method GET|POST|PUT|OPTIONS|DELETE
      * @param string $format požadovaný formát komunikace
+     * 
      * @return int HTTP Response CODE
      */
     public function doCurlRequest($url, $method, $format = null)
@@ -683,34 +598,15 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * Convert XML to array.
-     *
-     * @param string $xml
-     *
-     * @return array
+     * Load Data Row from IPEX
+     * 
+     * @param string $key what we want to get
+     * 
+     * @return int loaded columns count
      */
-    public static function xml2array($xml)
-    {
-        $arr = [];
-
-        if (is_string($xml)) {
-            $xml = simplexml_load_string($xml);
-        }
-
-        foreach ($xml->children() as $r) {
-            if (count($r->children()) == 0) {
-                $arr[$r->getName()] = strval($r);
-            } else {
-                $arr[$r->getName()][] = self::xml2array($r);
-            }
-        }
-
-        return $arr;
-    }
-
     public function loadFromIPEX($key)
     {
-        return $this->takeData($this->requestData(is_array($key) ? $this->addUrlParams(null,
+        return $this->takeData($this->requestData(is_array($key) ? \Ease\Shared::addUrlParams(null,
                         $key) : $key));
     }
 
@@ -719,6 +615,7 @@ class ApiClient extends \Ease\Brick
      *
      * @param array  $resultData
      * @param string $url        URL
+     * 
      * @return boolean Log save success
      */
     public function logResult($resultData = null, $url = null)
