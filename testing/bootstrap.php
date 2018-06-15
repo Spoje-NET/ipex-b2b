@@ -1,9 +1,9 @@
 <?php
 /**
- * FlexiPeeHP - nastavení testů.
+ * IPEX B2B - nastavení testů.
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015 Spoje.Net
+ * @copyright  2018 Spoje.Net
  */
 if (file_exists('../vendor/autoload.php')) {
     include_once '../vendor/autoload.php';
@@ -27,8 +27,8 @@ define('IPEX_URL', 'https://restapi.ipex.cz');
 /*
  * Uživatel ipex-b2b API
  */
-define('IPEX_LOGIN', 'spojenet_api');
+define('IPEX_LOGIN', 'xxxx');
 /*
  * Heslo ipex-b2b API
  */
-define('IPEX_PASSWORD', 'DKfl5e8T');
+define('IPEX_PASSWORD', 'xxxx');
