@@ -4,6 +4,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
-        <group name="Group 20171205-02:25:52"/>
+        <group name="Group 20171205-02:25:52">
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/testing/src/IPEXB2B/ApiClientTest.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/testing/bootstrap.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/Examples/ListCustomers.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Voip.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Token.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/ApiClient.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Services.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Customers.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/debian/composer.json</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/composer.json</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/testing/src/IPEXB2B/CallsTest.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/Examples/ListVoipNumbers.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/Examples/PostpaidInvoicesLastMonth.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/vendor/phpunit/phpunit/src/Framework/TestCase.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Calls.php</file>
+            <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Rights.php</file>
+        </group>
     </open-files>
 </project-private>

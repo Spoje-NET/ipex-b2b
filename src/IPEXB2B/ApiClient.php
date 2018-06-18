@@ -252,7 +252,7 @@ class ApiClient extends \Ease\Brick
      * Token handling object live here
      * @var Token 
      */
-    protected $tokener        = null;
+    protected $tokener = null;
 
     /**
      * Class for read only interaction with IPEX.
@@ -399,23 +399,22 @@ class ApiClient extends \Ease\Brick
         return $sectionUrl;
     }
 
-
-/**
- * Add UrlParams to Requests URL
- * 
- * @param array $urlParams
- * 
- * @return array all urlParams
- */    
-    public function setUrlParams($urlParams){
-        if(is_array($this->urlParams)){
+    /**
+     * Add UrlParams to Requests URL
+     * 
+     * @param array $urlParams
+     * 
+     * @return array all urlParams
+     */
+    public function setUrlParams($urlParams)
+    {
+        if (is_array($this->urlParams)) {
             $this->urlParams = array_merge($this->urlParams, $urlParams);
         } else {
             $this->urlParams = $urlParams;
         }
         return $this->urlParams;
     }
-
 
     /**
      * Update $this->apiURL
@@ -441,13 +440,14 @@ class ApiClient extends \Ease\Brick
 
         if (preg_match('/^http/', $urlSuffix)) {
             $url = $urlSuffix;
-        } elseif (strlen ($urlSuffix) && ($urlSuffix[0] == '/')) {
+        } elseif (strlen($urlSuffix) && ($urlSuffix[0] == '/')) {
             $url = $this->url.$urlSuffix;
         } else {
             $url = $this->sectionUrlWithSuffix($urlSuffix);
         }
 
-        $responseCode = $this->doCurlRequest( \Ease\Shared::addUrlParams( $url, $this->urlParams ), $method, $format);
+        $responseCode = $this->doCurlRequest(\Ease\Shared::addUrlParams($url,
+                $this->urlParams), $method, $format);
 
         return strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray($this->lastCurlResponse,
                     $this->responseMimeType), $responseCode) : null;
@@ -647,6 +647,18 @@ class ApiClient extends \Ease\Brick
         return \DateTime::createFromFormat('Y-m-d H:i:s.u',
                 str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)));
         \DateTime::getLastErrors();
+    }
+
+    /**
+     * Return Day in IpexAPI format
+     * 
+     * @param \DateTime $dateTime
+     * 
+     * @return string
+     */
+    public static function dateTimeToIpexDate($dateTime)
+    {
+        return $dateTime->format('Y-m-d');
     }
 
     /**
