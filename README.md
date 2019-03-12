@@ -120,8 +120,8 @@ V tomto případě je potřeba do souboru composer.json vaší aplikace přidat:
 
 ```json
     "require": {
-        "ipex-b2b": "*",
-        "ease-framework": "*"
+        "spojenet_ipex-b2b": "*",
+        "vitexsoftware_ease-framework": "*"
     },
     "repositories": [
         {
@@ -145,10 +145,10 @@ Takže při instalaci závislostí bude vypadat nějak takto:
 
     Loading composer repositories with package information
     Installing dependencies from lock file
-      - Installing ease-framework (1.1.3.3)
+      - Installing vitexsoftware_ease-framework (1.24)
         Symlinked from /usr/share/php/Ease
 
-      - Installing ipex-b2b (0.2.1)
+      - Installing spojenet_ipex-b2b (0.2.1)
         Symlinked from /usr/share/php/IPEXB2B
 
 A aktualizaci bude možné dělat globálně pro celý systém prostřednictvím apt-get.
