@@ -1,5 +1,5 @@
 {
-    "name": "spojenet_ipexb2b",
+    "name": "deb/ipexb2b",
     "description": "PHP Library for interaction with restapi.ipex.cz",
     "homepage": "https://github.com/Spoje-NET/ipex-b2b",
     "license": "GPL-2.0+",
@@ -12,7 +12,6 @@
         }
     ],
     "require": {
-        "php": ">= 5.6",
         "ext-curl": "*",
         "deb/ease-framework": "*"
     },
