@@ -3,7 +3,7 @@
  * IPEXB2B - Client for Access to IPEX class.
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  (C) 2017 Spoje.Net
+ * @copyright  (C) 2017-2019 Spoje.Net
  */
 
 namespace IPEXB2B;
@@ -277,6 +277,21 @@ class ApiClient extends \Ease\Brick
         }
     }
 
+    /**
+     * Add Info about used user, server and libraries
+     *
+     * @param string $prefix banner prefix text
+     * @param string $suffix banner suffix text
+     */
+    public function logBanner($prefix = null, $suffix = null)
+    {
+        parent::logBanner($prefix,
+            ' IPEX '.str_replace('://', '://'.$this->user.'@',
+                $this->getApiUrl()).' IpexB2B v'.self::$libVersion.$suffix
+        );
+    }
+    
+    
     /**
      * SetUp Object to be ready for connect
      *
