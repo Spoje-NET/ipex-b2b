@@ -120,7 +120,7 @@ V tomto případě je potřeba do souboru composer.json vaší aplikace přidat:
 
 ```json
     "require": {
-        "spojenet_ipex-b2b": "*",
+        "deb/ipex-b2b": "*",
         "deb/ease-framework": "*"
     },
     "repositories": [
@@ -148,7 +148,7 @@ Takže při instalaci závislostí bude vypadat nějak takto:
       - Installing deb/ease-framework (1.24)
         Symlinked from /usr/share/php/Ease
 
-      - Installing spojenet_ipex-b2b (0.2.1)
+      - Installing deb/ipex-b2b (0.2.1)
         Symlinked from /usr/share/php/IPEXB2B
 
 A aktualizaci bude možné dělat globálně pro celý systém prostřednictvím apt-get.
