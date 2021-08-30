@@ -11,7 +11,7 @@
     "require": {
         "php": ">= 7.1",
         "ext-curl": "*",
-        "vitexsoftware/ease-core": "dev-master"
+        "vitexsoftware/ease-core": ">=1.12"
     },
     "autoload": {
         "psr-4": {
@@ -20,15 +20,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\Ease\\": "vendor/vitexsoftware/ease-framework/tests/src/Ease",
+            "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
             "Test\\IPEXB2B\\": "testing/src/IPEXB2B/",
             "Test\\": "testing/"
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "phpunit/phpunit-skeleton-generator": "*",
-        "jakub-onderka/php-parallel-lint": "*",
-        "jakub-onderka/php-console-highlighter": "*"
+        "phpunit/phpunit": ">=9"
     }
 }
