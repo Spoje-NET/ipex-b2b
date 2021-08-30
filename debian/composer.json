@@ -13,7 +13,7 @@
     ],
     "require": {
         "ext-curl": "*",
-        "deb/ease-framework": "*"
+        "deb/ease-core": "*"
     },
     "autoload": {
         "psr-4": {

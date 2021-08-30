@@ -9,9 +9,9 @@
         }
     ],
     "require": {
-        "php": ">= 5.6",
+        "php": ">= 7.1",
         "ext-curl": "*",
-        "vitexsoftware/ease-framework": "dev-master"
+        "vitexsoftware/ease-core": ">=1.12"
     },
     "autoload": {
         "psr-4": {
@@ -20,16 +20,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\Ease\\": "vendor/vitexsoftware/ease-framework/tests/src/Ease",
+            "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
             "Test\\IPEXB2B\\": "testing/src/IPEXB2B/",
             "Test\\": "testing/"
         }
     },
     "require-dev": {
-        "phpunit/php-token-stream": "~1.2",
-        "phpunit/phpunit": "5.3.*",
-        "phpunit/phpunit-skeleton-generator": "*",
-        "jakub-onderka/php-parallel-lint": "^0.9.2",
-        "jakub-onderka/php-console-highlighter": "^0.3.2"
+        "phpunit/phpunit": ">=9"
     }
 }
