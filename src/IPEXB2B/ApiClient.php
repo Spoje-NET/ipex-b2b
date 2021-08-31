@@ -264,7 +264,6 @@ class ApiClient extends \Ease\Brick
     {
         $this->init = $init;
 
-        parent::__construct();
         $this->setUp($options);
         $this->curlInit();
 
