@@ -460,7 +460,7 @@ class ApiClient extends \Ease\Brick
             $url = $this->sectionUrlWithSuffix($urlSuffix);
         }
 
-        $responseCode = $this->doCurlRequest(\Ease\Shared::addUrlParams($url,
+        $responseCode = $this->doCurlRequest(\Ease\Functions::addUrlParams($url,
                 $this->urlParams), $method, $format);
 
         return strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray($this->lastCurlResponse,
