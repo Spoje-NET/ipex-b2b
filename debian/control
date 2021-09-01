@@ -7,7 +7,7 @@ Priority: optional
 Homepage: https://github.com/Spoje-NET/ipex-b2b
 
 Package: php-spojenet-ipex-b2b
-Depends: ${misc:Depends},php7.1-curl | php7.2-curl | php7.3-curl ,ease-core
+Depends: ${misc:Depends},php7.1-curl | php7.2-curl | php7.3-curl ,php-vitexsoftware-ease-core
 Suggests: composer,ipex-b2b-doc
 Architecture: all
 Section: web
