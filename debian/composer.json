@@ -3,7 +3,7 @@
     "description": "PHP Library for interaction with restapi.ipex.cz",
     "homepage": "https://github.com/Spoje-NET/ipex-b2b",
     "license": "GPL-2.0+",
-    "version": "0.2",
+    "version": "1.0",
     "type": "library",
     "authors": [
         {

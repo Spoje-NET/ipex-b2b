@@ -111,17 +111,24 @@ Debian/Ubuntu
 
 Pro Linux jsou k dispozici .deb balíčky. Prosím použijte repo:
 
-    wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
-    echo deb http://v.s.cz/ stable main > /etc/apt/sources.list.d/ease.list
-    aptitude update
-    aptitude install php-ipex-b2b
+
+```shell
+sudo apt install lsb-release wget apt-transport-https bzip2
+
+sudo wget -O /usr/share/keyrings/vitexsoftware.gpg https://repo.vitexsoftware.cz/keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/vitexsoftware.gpg]  https://repo.vitexsoftware.cz  $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
+sudo apt update
+
+sudo apt install php-spojenet-ipex-b2b
+```
+
 
 V tomto případě je potřeba do souboru composer.json vaší aplikace přidat:
 
 ```json
     "require": {
         "deb/ipex-b2b": "*",
-        "deb/ease-framework": "*"
+        "deb/ease-core": "*"
     },
     "repositories": [
         {
@@ -133,7 +140,7 @@ V tomto případě je potřeba do souboru composer.json vaší aplikace přidat:
         },
         {
             "type": "path",
-            "url": "/usr/share/php/Ease",
+            "url": "/usr/share/php/EaseCore",
             "options": {
                 "symlink": true
             }
