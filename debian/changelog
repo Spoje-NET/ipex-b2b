@@ -1,4 +1,4 @@
-php-ipex-b2b (0.2) UNRELEASED; urgency=low
+php-spojenet-ipex-b2b (0.2) UNRELEASED; urgency=low
 
   [ Vítězslav Dvořák ]
   * Better Error Parsing
@@ -7,11 +7,5 @@ php-ipex-b2b (0.2) UNRELEASED; urgency=low
   *     Do not die in case of server error
   *     Building Fixed
 
-  [ root ]
-  *     Building Fixed
-
-  [ vitex ]
-  *     Building Fixed
-  *     Building Fixed
 
  -- vitex <vitex@kickass.vitexsoftware.cz>  Wed, 17 Jan 2018 12:54:02 +0100
