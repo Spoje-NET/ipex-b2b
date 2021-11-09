@@ -1,4 +1,5 @@
 <?php
+
 /**
  * IPEXB2B - Client for Access to IPEX class.
  *
@@ -13,8 +14,8 @@ namespace IPEXB2B;
  *
  * @url https://restapi.ipex.cz/documentation#/
  */
-class ApiClient extends \Ease\Brick
-{
+class ApiClient extends \Ease\Brick {
+
     /**
      * Version of IPEXB2B library
      *
@@ -260,8 +261,7 @@ class ApiClient extends \Ease\Brick
      * @param mixed $init default record id or initial data
      * @param array $options Connection settings override
      */
-    public function __construct($init = null, $options = [])
-    {
+    public function __construct($init = null, $options = []) {
         $this->init = $init;
 
         $this->setUp($options);
@@ -282,23 +282,20 @@ class ApiClient extends \Ease\Brick
      * @param string $prefix banner prefix text
      * @param string $suffix banner suffix text
      */
-    public function logBanner($prefix = null, $suffix = null)
-    {
+    public function logBanner($prefix = null, $suffix = null) {
         parent::logBanner($prefix,
-            ' IPEX '.str_replace('://', '://'.$this->user.'@',
-                $this->getApiUrl()).' IpexB2B v'.self::$libVersion.$suffix
+                ' IPEX ' . str_replace('://', '://' . $this->user . '@',
+                        $this->getApiUrl()) . ' IpexB2B v' . self::$libVersion . $suffix
         );
     }
-    
-    
+
     /**
      * SetUp Object to be ready for connect
      *
      * @param array $options Object Options (company,url,user,password,section,
      *                                       defaultUrlParams,debug)
      */
-    public function setUp($options = [])
-    {
+    public function setUp($options = []) {
         $this->setupProperty($options, 'url', 'IPEX_URL');
         $this->setupProperty($options, 'user', 'IPEX_LOGIN');
         $this->setupProperty($options, 'password', 'IPEX_PASSWORD');
@@ -313,8 +310,7 @@ class ApiClient extends \Ease\Brick
     /**
      * Inicializace CURL
      */
-    public function curlInit()
-    {
+    public function curlInit() {
         $this->curl = \curl_init(); // create curl resource
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true); // return content as a string from curl_exec
         curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, true); // follow redirects (compatibility for future changes in IPEX)
@@ -335,8 +331,7 @@ class ApiClient extends \Ease\Brick
      *
      * @param mixed $init číslo/"(code:)kód"/(část)URI záznamu k načtení | pole hodnot k předvyplnění
      */
-    public function processInit($init)
-    {
+    public function processInit($init) {
         if (empty($init) == false) {
             $this->loadFromIPEX($init);
         }
@@ -350,8 +345,7 @@ class ApiClient extends \Ease\Brick
      * 
      * @return boolean section switching status
      */
-    public function setSection($section)
-    {
+    public function setSection($section) {
         $this->section = $section;
         return $this->updateApiURL();
     }
@@ -362,8 +356,7 @@ class ApiClient extends \Ease\Brick
      *
      * @return string
      */
-    public function getSection()
-    {
+    public function getSection() {
         return $this->section;
     }
 
@@ -374,8 +367,7 @@ class ApiClient extends \Ease\Brick
      * 
      * @return string Data strored
      */
-    public function setPostFields($data)
-    {
+    public function setPostFields($data) {
         return $this->postFields = $data;
     }
 
@@ -384,10 +376,9 @@ class ApiClient extends \Ease\Brick
      *
      * @return string Evidence URL
      */
-    public function getSectionURL()
-    {
-        $sectionUrl = $this->url.'/'.$this->protoVersion.'/';
-        $section    = $this->getSection();
+    public function getSectionURL() {
+        $sectionUrl = $this->url . '/' . $this->protoVersion . '/';
+        $section = $this->getSection();
         if (!empty($section)) {
             $sectionUrl .= $section;
         }
@@ -401,8 +392,7 @@ class ApiClient extends \Ease\Brick
      *
      * @return string
      */
-    public function sectionUrlWithSuffix($urlSuffix)
-    {
+    public function sectionUrlWithSuffix($urlSuffix) {
         $sectionUrl = $this->getSectionURL();
         if (!empty($urlSuffix)) {
             if ($urlSuffix[0] != '?') {
@@ -420,8 +410,7 @@ class ApiClient extends \Ease\Brick
      * 
      * @return array all urlParams
      */
-    public function setUrlParams($urlParams)
-    {
+    public function setUrlParams($urlParams) {
         if (is_array($this->urlParams)) {
             $this->urlParams = array_merge($this->urlParams, $urlParams);
         } else {
@@ -433,8 +422,7 @@ class ApiClient extends \Ease\Brick
     /**
      * Update $this->apiURL
      */
-    public function updateApiURL()
-    {
+    public function updateApiURL() {
         $this->apiURL = $this->getSectionURL();
     }
 
@@ -448,23 +436,22 @@ class ApiClient extends \Ease\Brick
      * @return array|boolean Výsledek operace
      */
     public function requestData($urlSuffix = null, $method = 'GET',
-                                $format = null)
-    {
+            $format = null) {
         $this->rowCount = null;
 
         if (preg_match('/^http/', $urlSuffix)) {
             $url = $urlSuffix;
         } elseif (strlen($urlSuffix) && ($urlSuffix[0] == '/')) {
-            $url = $this->url.$urlSuffix;
+            $url = $this->url . $urlSuffix;
         } else {
             $url = $this->sectionUrlWithSuffix($urlSuffix);
         }
 
         $responseCode = $this->doCurlRequest(\Ease\Functions::addUrlParams($url,
-                $this->urlParams), $method, $format);
+                        $this->urlParams), $method, $format);
 
         return strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray($this->lastCurlResponse,
-                    $this->responseMimeType), $responseCode) : null;
+                                $this->responseMimeType), $responseCode) : null;
     }
 
     /**
@@ -475,12 +462,11 @@ class ApiClient extends \Ease\Brick
      *
      * @return array
      */
-    public function rawResponseToArray($responseRaw)
-    {
+    public function rawResponseToArray($responseRaw) {
         $responseDecoded = json_decode($responseRaw, true, 10);
-        $decodeError     = json_last_error_msg();
+        $decodeError = json_last_error_msg();
         if ($decodeError != 'No error') {
-            $this->addStatusMessage('JSON Decoder: '.$decodeError, 'error');
+            $this->addStatusMessage('JSON Decoder: ' . $decodeError, 'error');
             $this->addStatusMessage($responseRaw, 'debug');
         }
         return $responseDecoded;
@@ -494,20 +480,19 @@ class ApiClient extends \Ease\Brick
      *
      * @return array main data part of response
      */
-    public function parseResponse($responseDecoded, $responseCode)
-    {
+    public function parseResponse($responseDecoded, $responseCode) {
         $response = null;
         switch ($responseCode) {
             case 201: //Success Write
                 if (isset($responseDecoded[$this->resultField][0]['id'])) {
                     $this->lastInsertedID = $responseDecoded[$this->resultField][0]['id'];
                     $this->setMyKey($this->lastInsertedID);
-                    $this->apiURL         = $this->getSectionURL().'/'.$this->lastInsertedID;
+                    $this->apiURL = $this->getSectionURL() . '/' . $this->lastInsertedID;
                 } else {
                     $this->lastInsertedID = null;
                 }
             case 200: //Success Read
-                $response         = $this->lastResult = $responseDecoded;
+                $response = $this->lastResult = $responseDecoded;
                 break;
 
             case 500: // Internal Server Error
@@ -517,8 +502,8 @@ class ApiClient extends \Ease\Brick
                 }
             case 400: //Bad Request parameters
             default: //Something goes wrong
-                $this->addStatusMessage($responseCode.': '.$this->curlInfo['url'],
-                    'warning');
+                $this->addStatusMessage($responseCode . ': ' . $this->curlInfo['url'],
+                        'warning');
                 if (is_array($responseDecoded)) {
                     $this->parseError($responseDecoded);
                 }
@@ -535,14 +520,13 @@ class ApiClient extends \Ease\Brick
      *
      * @return int number of errors processed
      */
-    public function parseError(array $responseDecoded)
-    {
-        $message = $responseDecoded['statusCode'].': ';
+    public function parseError(array $responseDecoded) {
+        $message = $responseDecoded['statusCode'] . ': ';
         if (array_key_exists('error', $responseDecoded)) {
             $message .= $responseDecoded['error'];
         }
         if (array_key_exists('message', $responseDecoded)) {
-            $message .= ' '.$responseDecoded['message'];
+            $message .= ' ' . $responseDecoded['message'];
         }
         $this->addStatusMessage($message, 'error');
         return 1;
@@ -557,8 +541,7 @@ class ApiClient extends \Ease\Brick
      * 
      * @return int HTTP Response CODE
      */
-    public function doCurlRequest($url, $method, $format = null)
-    {
+    public function doCurlRequest($url, $method, $format = null) {
         if (is_null($format)) {
             $format = $this->format;
         }
@@ -584,24 +567,24 @@ class ApiClient extends \Ease\Brick
         $httpHeadersFinal = [];
         foreach ($httpHeaders as $key => $value) {
             if (($key == 'User-Agent') && ($value == 'IPEXB2B')) {
-                $value .= ' v'.self::$libVersion;
+                $value .= ' v' . self::$libVersion;
             }
-            $httpHeadersFinal[] = $key.': '.$value;
+            $httpHeadersFinal[] = $key . ': ' . $value;
         }
 
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $httpHeadersFinal);
 
 // Proveď samotnou operaci
-        $this->lastCurlResponse            = curl_exec($this->curl);
-        $this->curlInfo                    = curl_getinfo($this->curl);
-        $this->curlInfo['when']            = microtime();
+        $this->lastCurlResponse = curl_exec($this->curl);
+        $this->curlInfo = curl_getinfo($this->curl);
+        $this->curlInfo['when'] = microtime();
         $this->curlInfo['request_headers'] = $httpHeadersFinal;
-        $this->responseMimeType            = $this->curlInfo['content_type'];
-        $this->lastResponseCode            = $this->curlInfo['http_code'];
-        $this->lastCurlError               = curl_error($this->curl);
+        $this->responseMimeType = $this->curlInfo['content_type'];
+        $this->lastResponseCode = $this->curlInfo['http_code'];
+        $this->lastCurlError = curl_error($this->curl);
         if (strlen($this->lastCurlError)) {
             $this->addStatusMessage(sprintf('Curl Error (HTTP %d): %s',
-                    $this->lastResponseCode, $this->lastCurlError), 'error');
+                            $this->lastResponseCode, $this->lastCurlError), 'error');
         }
 
         if ($this->debug === true) {
@@ -618,10 +601,8 @@ class ApiClient extends \Ease\Brick
      * 
      * @return int loaded columns count
      */
-    public function loadFromIPEX($key)
-    {
-        return $this->takeData($this->requestData(is_array($key) ? \Ease\Shared::addUrlParams(null,
-                        $key) : $key));
+    public function loadFromIPEX($key) {
+        return $this->takeData($this->requestData(is_array($key) ? \Ease\Shared::addUrlParams('', $key) : $key));
     }
 
     /**
@@ -632,8 +613,7 @@ class ApiClient extends \Ease\Brick
      * 
      * @return boolean Log save success
      */
-    public function logResult($resultData = null, $url = null)
-    {
+    public function logResult($resultData = null, $url = null) {
         $logResult = false;
         if (is_null($resultData)) {
             $resultData = $this->lastResult;
@@ -642,8 +622,8 @@ class ApiClient extends \Ease\Brick
             $this->logger->addStatusMessage(urldecode($url));
         }
         if (array_key_exists('message', $resultData)) {
-            $this->logger->addStatusMessage($resultData['statusCode'].': '.$resultData['message'],
-                'warning');
+            $this->logger->addStatusMessage($resultData['statusCode'] . ': ' . $resultData['message'],
+                    'warning');
         }
 
         return $logResult;
@@ -656,10 +636,9 @@ class ApiClient extends \Ease\Brick
      *
      * @return \DateTime | false
      */
-    public static function ipexDateTimeToDateTime($ipexdatetime)
-    {
+    public static function ipexDateTimeToDateTime($ipexdatetime) {
         return \DateTime::createFromFormat('Y-m-d H:i:s.u',
-                str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)));
+                        str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)));
         \DateTime::getLastErrors();
     }
 
@@ -670,8 +649,7 @@ class ApiClient extends \Ease\Brick
      * 
      * @return string
      */
-    public static function dateTimeToIpexDate($dateTime)
-    {
+    public static function dateTimeToIpexDate($dateTime) {
         return $dateTime->format('Y-m-d');
     }
 
@@ -680,8 +658,7 @@ class ApiClient extends \Ease\Brick
      *
      * @return string
      */
-    public function getTokenString()
-    {
+    public function getTokenString() {
         return $this->tokener->getTokenString();
     }
 
@@ -692,8 +669,7 @@ class ApiClient extends \Ease\Brick
      *
      * @return boolean get flag state
      */
-    public function ignore404($ignore = null)
-    {
+    public function ignore404($ignore = null) {
         if (!is_null($ignore)) {
             $this->ignoreNotFound = $ignore;
         }
@@ -703,8 +679,7 @@ class ApiClient extends \Ease\Brick
     /**
      * Odpojení od IPEX.
      */
-    public function disconnect()
-    {
+    public function disconnect() {
         if (is_resource($this->curl)) {
             curl_close($this->curl);
         }
@@ -714,8 +689,7 @@ class ApiClient extends \Ease\Brick
     /**
      * Reconnect After unserialization
      */
-    public function __wakeup()
-    {
+    public function __wakeup() {
         parent::__wakeup();
         $this->curlInit();
     }
@@ -723,8 +697,8 @@ class ApiClient extends \Ease\Brick
     /**
      * Disconnect CURL befere pass away
      */
-    public function __destruct()
-    {
+    public function __destruct() {
         $this->disconnect();
     }
+
 }
