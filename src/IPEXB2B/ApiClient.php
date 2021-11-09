@@ -620,8 +620,7 @@ class ApiClient extends \Ease\Brick
      */
     public function loadFromIPEX($key)
     {
-        return $this->takeData($this->requestData(is_array($key) ? \Ease\Shared::addUrlParams(null,
-                        $key) : $key));
+        return $this->takeData($this->requestData(is_array($key) ? \Ease\Functions::addUrlParams('',$key) : $key));
     }
 
     /**
