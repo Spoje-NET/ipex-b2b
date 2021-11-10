@@ -602,7 +602,7 @@ class ApiClient extends \Ease\Brick {
      * @return int loaded columns count
      */
     public function loadFromIPEX($key) {
-        return $this->takeData($this->requestData(is_array($key) ? \Ease\Shared::addUrlParams('', $key) : $key));
+        return $this->takeData($this->requestData(is_array($key) ? \Ease\Functions::addUrlParams('', $key) : $key));
     }
 
     /**
