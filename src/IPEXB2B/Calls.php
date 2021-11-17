@@ -47,7 +47,7 @@ class Calls extends ApiClient
      */
     public function getCallsForCustomer($dateFrom,$customerId)
     {
-        return $this->requestData(\Ease\Functions::addUrlParams(null,
+        return $this->requestData(\Ease\Functions::addUrlParams('',
                     ['customerId' => $customerId, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)]));
     }
 }
