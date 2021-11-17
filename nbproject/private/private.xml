@@ -22,8 +22,15 @@
             <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Rights.php</file>
         </group>
         <group>
-            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/composer.json</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/IPEXB2B/Rights.php</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/IPEXB2B/Calls.php</file>
             <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/IPEXB2B/ApiClient.php</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/Jenkinsfile</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/IPEXB2B/Token.php</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/IPEXB2B/Customers.php</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/IPEXB2B/Voip.php</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/demo.php</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/IPEXB2B/Services.php</file>
         </group>
     </open-files>
 </project-private>
