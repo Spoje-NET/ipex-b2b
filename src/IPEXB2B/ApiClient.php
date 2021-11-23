@@ -639,7 +639,6 @@ class ApiClient extends \Ease\Brick {
     public static function ipexDateTimeToDateTime($ipexdatetime) {
         return \DateTime::createFromFormat('Y-m-d H:i:s.u',
                         str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)));
-        \DateTime::getLastErrors();
     }
 
     /**
