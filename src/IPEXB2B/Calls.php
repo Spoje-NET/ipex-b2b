@@ -33,7 +33,7 @@ class Calls extends ApiClient {
      * @return array
      */
     public function getCallsForNumber($dateFrom, $telNo) {
-        return $this->requestData(\Ease\Functions::addUrlParams(null,
+        return $this->requestData(\Ease\Functions::addUrlParams('',
                                 ['number' => $telNo, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)]));
     }
 
@@ -46,7 +46,7 @@ class Calls extends ApiClient {
      * @return array
      */
     public function getCallsForCustomer($dateFrom, $customerId) {
-        return $this->requestData(\Ease\Functions::addUrlParams(null,
+        return $this->requestData(\Ease\Functions::addUrlParams('',
                                 ['customerId' => $customerId, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)]));
     }
 
