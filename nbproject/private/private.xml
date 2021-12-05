@@ -21,6 +21,10 @@
             <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Calls.php</file>
             <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Rights.php</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/IPEXB2B/Calls.php</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/vendor/pear/mail_mime/Mail/mimePart.php</file>
+            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/vendor/sebastian/recursion-context/src/InvalidArgumentException.php</file>
+        </group>
     </open-files>
 </project-private>

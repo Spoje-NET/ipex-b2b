@@ -1,37 +1,33 @@
 {
-    "name": "deb/ipexb2b",
-    "description": "PHP Library for interaction with restapi.ipex.cz",
-    "homepage": "https://github.com/Spoje-NET/ipex-b2b",
-    "license": "GPL-2.0+",
-    "version": "1.0",
-    "type": "library",
-    "authors": [
-        {
-            "name": "Vítězslav Dvořák",
-            "email": "info@vitexsoftware.cz"
-        }
-    ],
-    "require": {
-        "ext-curl": "*",
-        "deb/ease-core": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "IPEXB2B\\": "."
-        }
-    },
-    "minimum-stability": "dev",
-    "require": {
-        "php": ">=5.6",
-        "ext-curl": "*"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/usr/share/php/Ease",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
+  "name": "deb/ipexb2b",
+  "description": "PHP Library for interaction with restapi.ipex.cz",
+  "homepage": "https://github.com/Spoje-NET/ipex-b2b",
+  "license": "GPL-2.0+",
+  "version": "1.0",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Vítězslav Dvořák",
+      "email": "info@vitexsoftware.cz"
+    }
+  ],
+  "require": {
+    "php": ">=5.6",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "IPEXB2B\\": "."
+    }
+  },
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/usr/share/php/Ease",
+      "options": {
+        "symlink": true
+      }
+    }
+  ]
 }
