@@ -8,3 +8,9 @@
 /debian/php-ipex-b2b.substvars
 /debian/php-ipex-b2b/
 /docs/
+/nbproject/private/
+/.phpdoc/
+/debian/php-spojenet-ipex-b2b/
+/debian/php-spojenet-ipex-b2b.debhelper.log
+/debian/php-spojenet-ipex-b2b.substvars
+/debian/.debhelper/

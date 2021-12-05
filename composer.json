@@ -1,7 +1,7 @@
 {
-    "name": "spoje.net/ipexb2b",
+    "name": "spojenet/ipexb2b",
     "description": "PHP Based Library for easy interaction with IPEX.cz JSON api",
-    "license": "GPL-2.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Vítězslav Dvořák",
@@ -9,7 +9,6 @@
         }
     ],
     "require": {
-        "php": ">= 7.1",
         "ext-curl": "*",
         "vitexsoftware/ease-core": ">=1.12"
     },

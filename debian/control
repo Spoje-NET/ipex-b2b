@@ -1,5 +1,5 @@
 Source: php-spojenet-ipex-b2b
-Build-Depends: debhelper (>= 7.0.50~),phpdocumentor
+Build-Depends: debhelper (>= 7.0.50~),phpdocumentor, jq, moreutils
 Standards-Version: 3.8.4
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
@@ -7,10 +7,11 @@ Priority: optional
 Homepage: https://github.com/Spoje-NET/ipex-b2b
 
 Package: php-spojenet-ipex-b2b
-Depends: ${misc:Depends},php-curl ,php-vitexsoftware-ease-core
+Depends: ${misc:Depends}, php-curl ,php-vitexsoftware-ease-core
 Suggests: composer,ipex-b2b-doc
 Architecture: all
 Section: web
 Priority: optional
 Description: PHP Based IPEX B2B RestAPI/Json library
  Allow you perform read and write operations on VoIP system IPEX
+

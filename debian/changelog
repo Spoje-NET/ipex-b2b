@@ -7,12 +7,7 @@ php-spojenet-ipex-b2b (1.0) UNRELEASED; urgency=low
   *     Do not die in case of server error
   *     Building Fixed
 
-  [ root ]
-  *     Building Fixed
+  * Update for current ease-core
+  * updated for current ease core
 
-  [ vitex ]
-  *     Building Fixed
-  *     Building Fixed
-  * v1 release
-
- -- vitex <info@vitexsoftware.cz>  Wed, 01 Sep 2021 04:42:29 +0200
+ -- vitex <info@vitexsoftware.cz>  Tue, 23 Nov 2021 21:57:50 +0100

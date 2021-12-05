@@ -17,13 +17,12 @@ namespace IPEXB2B;
 class ApiClient extends \Ease\Brick {
 
     use \Ease\Logger\Logging;
-
     /**
      * Version of IPEXB2B library
      *
      * @var string
      */
-    public static $libVersion = '0.1.';
+    public static $libVersion = '0.1.2';
 
     /**
      * Verze protokolu použitého pro komunikaci.
@@ -641,7 +640,6 @@ class ApiClient extends \Ease\Brick {
     public static function ipexDateTimeToDateTime($ipexdatetime) {
         return \DateTime::createFromFormat('Y-m-d H:i:s.u',
                         str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)));
-        \DateTime::getLastErrors();
     }
 
     /**
