@@ -16,6 +16,7 @@ namespace IPEXB2B;
  */
 class ApiClient extends \Ease\Brick {
 
+    use \Ease\Logger\Logging;
     /**
      * Version of IPEXB2B library
      *
@@ -394,7 +395,7 @@ class ApiClient extends \Ease\Brick {
      */
     public function sectionUrlWithSuffix($urlSuffix) {
         $sectionUrl = $this->getSectionURL();
-        if (!empty($urlSuffix)) {
+        if (!empty($urlSuffix) & !is_integer($urlSuffix)) {
             if ($urlSuffix[0] != '?') {
                 $sectionUrl .= '/';
             }
@@ -441,7 +442,7 @@ class ApiClient extends \Ease\Brick {
 
         if (preg_match('/^http/', $urlSuffix)) {
             $url = $urlSuffix;
-        } elseif (strlen($urlSuffix) && ($urlSuffix[0] == '/')) {
+        } elseif (!is_integer($urlSuffix) && strlen($urlSuffix) && ($urlSuffix[0] == '/')) {
             $url = $this->url . $urlSuffix;
         } else {
             $url = $this->sectionUrlWithSuffix($urlSuffix);
@@ -619,10 +620,10 @@ class ApiClient extends \Ease\Brick {
             $resultData = $this->lastResult;
         }
         if (isset($url)) {
-            $this->logger->addStatusMessage(urldecode($url));
+            $this->addStatusMessage(urldecode($url));
         }
         if (array_key_exists('message', $resultData)) {
-            $this->logger->addStatusMessage($resultData['statusCode'] . ': ' . $resultData['message'],
+            $this->addStatusMessage($resultData['statusCode'] . ': ' . $resultData['message'],
                     'warning');
         }
 

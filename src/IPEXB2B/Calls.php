@@ -38,16 +38,17 @@ class Calls extends ApiClient {
     }
 
     /**
-     * 
+     * Obtain call list for customer
      * 
      * @param int $customerId
      * @param \DateTime $dateFrom Start Day of results
      * 
      * @return array
      */
-    public function getCallsForCustomer($dateFrom, $customerId) {
+    public function getCallsForCustomer($dateFrom,$customerId)
+    {
         return $this->requestData(\Ease\Functions::addUrlParams('',
-                                ['customerId' => $customerId, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)]));
+                    ['customerId' => $customerId, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)]));
     }
 
 }
