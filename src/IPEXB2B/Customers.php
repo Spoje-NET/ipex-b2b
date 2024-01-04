@@ -1,4 +1,5 @@
 <?php
+
 /**
  * IPEXB2B - Client for Access to IPEX Rights class.
  *
@@ -22,5 +23,4 @@ class Customers extends ApiClient
      * @var string
      */
     public $section = 'customers';
-
 }

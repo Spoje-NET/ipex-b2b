@@ -1,4 +1,5 @@
 <?php
+
 /**
  * IPEXB2B - Client for Access to IPEX Rights class.
  *
@@ -44,8 +45,8 @@ class Token extends ApiClient
 
     /**
      * Refresh Access Token
-     * 
-     * @return boolean refresh 
+     *
+     * @return boolean refresh
      */
     public function refreshToken()
     {
@@ -73,8 +74,8 @@ class Token extends ApiClient
     public function isExpired()
     {
         $expire = $this->ipexDateTimeToDateTime($this->getDataValue('expire'));
-        if(is_object($expire)){
-        $tdiff  = $expire->getTimestamp() - time();
+        if (is_object($expire)) {
+            $tdiff  = $expire->getTimestamp() - time();
         } else {
             $tdiff = 0;
         }
@@ -90,7 +91,7 @@ class Token extends ApiClient
             throw new \Ease\Exception(_('Password not set!'));
         }
         $this->setPostFields(json_encode(['username' => $this->user, 'password' => $this->password]));
-        return $this->requestData(null, 'POST');
+        return $this->requestData('', 'POST');
     }
 
     /**
