@@ -4,7 +4,7 @@
  * IPEXB2B - Client for Access to IPEX class.
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  (C) 2017-2019 Spoje.Net
+ * @copyright  (C) 2017-2023 Spoje.Net
  */
 
 namespace IPEXB2B;
@@ -159,7 +159,7 @@ class ApiClient extends \Ease\Brick
     /**
      * Informace o posledním HTTP requestu.
      *
-     * @var *
+     * @var array|null
      */
     public $curlInfo;
 
@@ -180,7 +180,7 @@ class ApiClient extends \Ease\Brick
     /**
      * Last Inserted ID.
      *
-     * @var int
+     * @var int|null
      */
     public $lastInsertedID = null;
 
@@ -483,7 +483,6 @@ class ApiClient extends \Ease\Brick
      * Parse Raw IPEX response in several formats
      *
      * @param string $responseRaw raw response body
-     * @param string $format      Raw Response format json|xml|etc
      *
      * @return array
      */
@@ -621,10 +620,6 @@ class ApiClient extends \Ease\Brick
             ), 'error');
         }
 
-        if ($this->debug === true) {
-            $this->saveDebugFiles();
-        }
-
         return $this->lastResponseCode;
     }
 
@@ -735,7 +730,6 @@ class ApiClient extends \Ease\Brick
      */
     public function __wakeup()
     {
-        parent::__wakeup();
         $this->curlInit();
     }
 

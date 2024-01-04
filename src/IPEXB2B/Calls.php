@@ -27,7 +27,7 @@ class Calls extends ApiClient
     /**
      * Obtain calls listing for give phone number
      *
-     * @param long $telNo
+     * @param string    $telNo
      * @param \DateTime $dateFrom Start Day of results
      *
      * @return array

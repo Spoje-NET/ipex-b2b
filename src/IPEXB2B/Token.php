@@ -102,7 +102,7 @@ class Token extends ApiClient
      *
      * @link   http://docs.php.net/en/language.oop5.patterns.html Dokumentace a priklad
      *
-     * @return \Ease\Shared
+     * @return self
      */
     public static function singleton()
     {
