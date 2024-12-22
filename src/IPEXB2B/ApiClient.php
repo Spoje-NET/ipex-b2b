@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * IPEXB2B - Client for Access to IPEX class.
+ * This file is part of the IpexB2B package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  (C) 2017-2023 Spoje.Net
+ * https://github.com/Spoje-NET/ipex-b2b
+ *
+ * (c) Spoje.Net <https://spoje.net>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace IPEXB2B;
 
 /**
- * Základní třída pro čtení z IPEX
+ * Základní třída pro čtení z IPEX.
  *
  * @url https://restapi.ipex.cz/documentation#/
  */
@@ -19,11 +25,9 @@ class ApiClient extends \Ease\Brick
     use \Ease\Logger\Logging;
 
     /**
-     * Version of IPEXB2B library
-     *
-     * @var string
+     * Version of IPEXB2B library.
      */
-    public static $libVersion = '0.1.2';
+    public static string $libVersion = '0.1.2';
 
     /**
      * Verze protokolu použitého pro komunikaci.
@@ -31,246 +35,210 @@ class ApiClient extends \Ease\Brick
      *
      * @var string Verze použitého API
      */
-    public $protoVersion = 'v1';
+    public string $protoVersion = 'v1';
 
     /**
-     * URL of object data in IPEX
+     * URL of object data in IPEX.
+     *
      * @var string url
      */
-    public $apiURL = null;
+    public string $apiURL;
 
     /**
      * Datový blok v poli odpovědi.
      * Data block in response field.
-     *
-     * @var string
      */
-    public $resultField = 'results';
+    public string $resultField = 'results';
 
     /**
      * Evidence užitá objektem.
-     * Evidence used by object
+     * Evidence used by object.
      *
-     * @link https://demo.ipex.eu/c/demo/section-list Přehled evidencí
-     * @var string
+     * @see https://demo.ipex.eu/c/demo/section-list Přehled evidencí
      */
-    public $section = null;
+    public string $section = '';
 
     /**
      * Výchozí formát pro komunikaci.
      * Default communication format.
      *
-     * @link https://www.ipex.eu/api/dokumentace/ref/format-types Přehled možných formátů
+     * @see https://www.ipex.eu/api/dokumentace/ref/format-types Přehled možných formátů
      *
      * @var string json|xml|...
      */
-    public $format = 'json';
+    public string $format = 'json';
 
     /**
      * formát příchozí odpovědi
-     * response format
+     * response format.
      *
-     * @link https://www.ipex.eu/api/dokumentace/ref/format-types Přehled možných formátů
+     * @see https://www.ipex.eu/api/dokumentace/ref/format-types Přehled možných formátů
      *
      * @var string json|xml|...
      */
-    public $responseMimeType = 'json';
+    public string $responseMimeType = 'json';
 
     /**
      * Curl Handle.
      *
      * @var resource
      */
-    public $curl = null;
+    public $curl;
 
     /**
-     * @link https://demo.ipex.eu/devdoc/company-identifier Identifikátor firmy
-     * @var string
+     * @see https://demo.ipex.eu/devdoc/company-identifier Identifikátor firmy
      */
-    public $company = null;
+    public string $company = '';
 
     /**
-     * Server[:port]
-     * @var string
+     * Server[:port].
      */
-    public $url = null;
+    public string $url = '';
 
     /**
-     * REST API Username
-     * @var string
+     * REST API Username.
      */
-    public $user = null;
+    public string $user = '';
 
     /**
-     * REST API Password
-     * @var string
+     * REST API Password.
      */
-    public $password = null;
+    public string $password = '';
 
     /**
      * @var array Pole HTTP hlaviček odesílaných s každým požadavkem
      */
-    public $defaultHttpHeaders = ['User-Agent' => 'IPEXB2B'];
+    public array $defaultHttpHeaders = ['User-Agent' => 'IPEXB2B'];
 
     /**
-     * Default additional request url parameters after question mark
+     * Default additional request url parameters after question mark.
      *
-     * @link https://www.ipex.eu/api/dokumentace/ref/urls   Common params
-     * @link https://www.ipex.eu/api/dokumentace/ref/paging Paging params
-     * @var array
+     * @see https://www.ipex.eu/api/dokumentace/ref/urls   Common params
+     * @see https://www.ipex.eu/api/dokumentace/ref/paging Paging params
      */
-    public $defaultUrlParams = ['limit' => 0];
+    public array $defaultUrlParams = ['limit' => 0];
 
     /**
      * Identifikační řetězec.
-     *
-     * @var string
      */
-    public $init = null;
+    public string $init = '';
 
     /**
      * Sloupeček s názvem.
-     *
-     * @var string
      */
-    public $nameColumn = 'nazev';
+    public string $nameColumn = 'nazev';
 
     /**
      * Sloupeček obsahující datum vložení záznamu do shopu.
-     *
-     * @var string
      */
-    public $myCreateColumn = 'false';
+    public string $myCreateColumn = 'false';
 
     /**
      * Slopecek obsahujici datum poslení modifikace záznamu do shopu.
-     *
-     * @var string
      */
-    public $myLastModifiedColumn = 'lastUpdate';
+    public string $myLastModifiedColumn = 'lastUpdate';
 
     /**
      * Klíčový idendifikátor záznamu.
-     *
-     * @var string
      */
-    public $fbKeyColumn = 'id';
+    public string $fbKeyColumn = 'id';
 
     /**
      * Informace o posledním HTTP requestu.
-     *
-     * @var array|null
      */
-    public $curlInfo;
+    public ?array $curlInfo = null;
 
     /**
      * Informace o poslední HTTP chybě.
-     *
-     * @var string
      */
-    public $lastCurlError = null;
+    public string $lastCurlError = '';
 
     /**
      * Used codes storage.
-     *
-     * @var array
      */
-    public $codes = null;
+    public array $codes = [];
 
     /**
      * Last Inserted ID.
+     */
+    public ?int $lastInsertedID = null;
+
+    /**
+     * Raw Content of last curl response.
+     */
+    public string $lastCurlResponse;
+
+    /**
+     * HTTP Response code of last request.
+     */
+    public int $lastResponseCode = 0;
+
+    /**
+     * Last operation result data or message(s).
+     */
+    public array $lastResult = [];
+
+    /**
+     * Number from  @rowCount.
+     */
+    public ?int $rowCount = null;
+
+    /**
+     * @see https://www.ipex.eu/api/dokumentace/ref/zamykani-odemykani/
      *
-     * @var int|null
-     */
-    public $lastInsertedID = null;
-
-    /**
-     * Raw Content of last curl response
-     *
-     * @var string
-     */
-    public $lastCurlResponse;
-
-    /**
-     * HTTP Response code of last request
-     *
-     * @var int
-     */
-    public $lastResponseCode = null;
-
-    /**
-     * Body data  for next curl POST operation
-     *
-     * @var string
-     */
-    protected $postFields = null;
-
-    /**
-     * Last operation result data or message(s)
-     *
-     * @var array
-     */
-    public $lastResult = null;
-
-    /**
-     * Nuber from  @rowCount
-     * @var int
-     */
-    public $rowCount = null;
-
-    /**
-     * @link https://www.ipex.eu/api/dokumentace/ref/zamykani-odemykani/
      * @var string filter query
      */
-    public $filter;
+    public string $filter;
 
     /**
-     * @link https://demo.ipex.eu/devdoc/actions Provádění akcí
-     * @var string
+     * Pole akcí které podporuje ta která section.
+     *
+     * @see https://demo.ipex.eu/c/demo/faktura-vydana/actions.json Např. Akce faktury
      */
-    protected $action;
+    public array $actionsAvailable = [];
 
     /**
-     * Pole akcí které podporuje ta která section
-     * @link https://demo.ipex.eu/c/demo/faktura-vydana/actions.json Např. Akce faktury
-     * @var array
+     * Parmetry pro URL.
+     *
+     * @see https://www.ipex.eu/api/dokumentace/ref/urls/ Všechny podporované parametry
      */
-    public $actionsAvailable = null;
-
-    /**
-     * Parmetry pro URL
-     * @link https://www.ipex.eu/api/dokumentace/ref/urls/ Všechny podporované parametry
-     * @var array
-     */
-    public $urlParams = [
+    public array $urlParams = [
     ];
 
     /**
-     * Save 404 results to log ?
-     * @var boolean
+     * Body data  for next curl POST operation.
      */
-    protected $ignoreNotFound = false;
+    protected string $postFields = '';
 
     /**
-     * Token handling object live here
-     * @var Token
+     * @see https://demo.ipex.eu/devdoc/actions Provádění akcí
      */
-    protected $tokener = null;
+    protected string $action;
+
+    /**
+     * Save 404 results to log ?
+     */
+    protected bool $ignoreNotFound = false;
+
+    /**
+     * Token handling object live here.
+     */
+    protected Token $tokener;
 
     /**
      * Class for read only interaction with IPEX.
      *
-     * @param mixed $init default record id or initial data
+     * @param mixed $init    default record id or initial data
      * @param array $options Connection settings override
      */
-    public function __construct($init = null, $options = [])
+    public function __construct($init = '', $options = [])
     {
         $this->init = $init;
 
         $this->setUp($options);
         $this->curlInit();
 
-        if (get_class($this) != 'IPEXB2B\Token') {
+        if (\get_class($this) !== 'IPEXB2B\Token') {
             $this->tokener = Token::instanced();
         }
 
@@ -280,54 +248,72 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * Add Info about used user, server and libraries
-     *
-     * @param string $prefix banner prefix text
-     * @param string $suffix banner suffix text
+     * Disconnect CURL befere pass away.
      */
-    public function logBanner($prefix = null, $suffix = null)
+    public function __destruct()
     {
-        parent::logBanner(
-            $prefix,
-            ' IPEX ' . str_replace(
-                '://',
-                '://' . $this->user . '@',
-                $this->getApiUrl()
-            ) . ' IpexB2B v' . self::$libVersion . $suffix
-        );
+        $this->disconnect();
     }
 
     /**
-     * SetUp Object to be ready for connect
+     * Reconnect After unserialization.
+     */
+    public function __wakeup(): void
+    {
+        $this->curlInit();
+    }
+
+    /**
+     * SetUp Object to be ready for connect.
      *
      * @param array $options Object Options (company,url,user,password,section,
-     *                                       defaultUrlParams,debug)
+     *                       defaultUrlParams,debug)
      */
-    public function setUp($options = [])
+    public function setUp($options = []): void
     {
         $this->setupProperty($options, 'url', 'IPEX_URL');
         $this->setupProperty($options, 'user', 'IPEX_LOGIN');
         $this->setupProperty($options, 'password', 'IPEX_PASSWORD');
+
         if (isset($options['section'])) {
             $this->setSection($options['section']);
         }
+
         $this->setupProperty($options, 'defaultUrlParams');
         $this->setupProperty($options, 'debug');
         $this->updateApiURL();
     }
 
     /**
-     * Inicializace CURL
+     * Add Info about used user, server and libraries.
+     *
+     * @param string $prefix banner prefix text
+     * @param string $suffix banner suffix text
      */
-    public function curlInit()
+    public function logBanner($prefix = null, $suffix = null): void
+    {
+        parent::logBanner(
+            $prefix,
+            ' IPEX '.str_replace(
+                '://',
+                '://'.$this->user.'@',
+                $this->getApiUrl(),
+            ).' IpexB2B v'.self::$libVersion.$suffix,
+        );
+    }
+
+    /**
+     * Inicializace CURL.
+     */
+    public function curlInit(): void
     {
         $this->curl = \curl_init(); // create curl resource
-        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true); // return content as a string from curl_exec
-        curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, true); // follow redirects (compatibility for future changes in IPEX)
-        curl_setopt($this->curl, CURLOPT_HTTPAUTH, true);       // HTTP authentication
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false); // IPEX by default uses Self-Signed certificates
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($this->curl, CURLOPT_VERBOSE, ($this->debug === true)); // For debugging
+        curl_setopt($this->curl, \CURLOPT_RETURNTRANSFER, true); // return content as a string from curl_exec
+        curl_setopt($this->curl, \CURLOPT_FOLLOWLOCATION, true); // follow redirects (compatibility for future changes in IPEX)
+        curl_setopt($this->curl, \CURLOPT_HTTPAUTH, true);       // HTTP authentication
+        curl_setopt($this->curl, \CURLOPT_SSL_VERIFYPEER, false); // IPEX by default uses Self-Signed certificates
+        curl_setopt($this->curl, \CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($this->curl, \CURLOPT_VERBOSE, $this->debug === true); // For debugging
     }
 
     /**
@@ -341,30 +327,31 @@ class ApiClient extends \Ease\Brick
      *
      * @param mixed $init číslo/"(code:)kód"/(část)URI záznamu k načtení | pole hodnot k předvyplnění
      */
-    public function processInit($init)
+    public function processInit($init): void
     {
-        if (empty($init) == false) {
+        if (empty($init) === false) {
             $this->loadFromIPEX($init);
         }
     }
 
     /**
      * Nastaví Sekci pro Komunikaci.
-     * Set section for communication
+     * Set section for communication.
      *
      * @param string $section section pathName to use
      *
-     * @return boolean section switching status
+     * @return bool section switching status
      */
     public function setSection($section)
     {
         $this->section = $section;
+
         return $this->updateApiURL();
     }
 
     /**
      * Vrací právě používanou evidenci pro komunikaci
-     * Obtain current used section
+     * Obtain current used section.
      *
      * @return string
      */
@@ -374,7 +361,7 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * Připraví data pro odeslání do FlexiBee
+     * Připraví data pro odeslání do FlexiBee.
      *
      * @param string $data
      *
@@ -386,22 +373,24 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * Return basic URL for used Evidence
+     * Return basic URL for used Evidence.
      *
      * @return string Evidence URL
      */
     public function getSectionURL()
     {
-        $sectionUrl = $this->url . '/' . $this->protoVersion . '/';
+        $sectionUrl = $this->url.'/'.$this->protoVersion.'/';
         $section = $this->getSection();
+
         if (!empty($section)) {
             $sectionUrl .= $section;
         }
+
         return $sectionUrl;
     }
 
     /**
-     * Add suffix to Evidence URL
+     * Add suffix to Evidence URL.
      *
      * @param string $urlSuffix
      *
@@ -410,17 +399,20 @@ class ApiClient extends \Ease\Brick
     public function sectionUrlWithSuffix($urlSuffix)
     {
         $sectionUrl = $this->getSectionURL();
-        if (!empty($urlSuffix) & !is_integer($urlSuffix)) {
-            if ($urlSuffix[0] != '?') {
+
+        if (!empty($urlSuffix) & !\is_int($urlSuffix)) {
+            if ($urlSuffix[0] !== '?') {
                 $sectionUrl .= '/';
             }
+
             $sectionUrl .= $urlSuffix;
         }
+
         return $sectionUrl;
     }
 
     /**
-     * Add UrlParams to Requests URL
+     * Add UrlParams to Requests URL.
      *
      * @param array $urlParams
      *
@@ -428,18 +420,19 @@ class ApiClient extends \Ease\Brick
      */
     public function setUrlParams($urlParams)
     {
-        if (is_array($this->urlParams)) {
+        if (\is_array($this->urlParams)) {
             $this->urlParams = array_merge($this->urlParams, $urlParams);
         } else {
             $this->urlParams = $urlParams;
         }
+
         return $this->urlParams;
     }
 
     /**
-     * Update $this->apiURL
+     * Update $this->apiURL.
      */
-    public function updateApiURL()
+    public function updateApiURL(): void
     {
         $this->apiURL = $this->getSectionURL();
     }
@@ -447,11 +440,11 @@ class ApiClient extends \Ease\Brick
     /**
      * Funkce, která provede I/O operaci a vyhodnotí výsledek.
      *
-     * @param string $urlSuffix část URL za identifikátorem firmy.
+     * @param string $urlSuffix část URL za identifikátorem firmy
      * @param string $method    HTTP/REST metoda
      * @param string $format    Requested format
      *
-     * @return array|boolean Výsledek operace
+     * @return array|bool Výsledek operace
      */
     public function requestData(
         $urlSuffix = '',
@@ -462,25 +455,25 @@ class ApiClient extends \Ease\Brick
 
         if (preg_match('/^http/', $urlSuffix)) {
             $url = $urlSuffix;
-        } elseif (!is_integer($urlSuffix) && strlen($urlSuffix) && ($urlSuffix[0] == '/')) {
-            $url = $this->url . $urlSuffix;
+        } elseif (!\is_int($urlSuffix) && \strlen($urlSuffix) && ($urlSuffix[0] === '/')) {
+            $url = $this->url.$urlSuffix;
         } else {
             $url = $this->sectionUrlWithSuffix($urlSuffix);
         }
 
         $responseCode = $this->doCurlRequest(\Ease\Functions::addUrlParams(
             $url,
-            $this->urlParams
+            $this->urlParams,
         ), $method, $format);
 
-        return strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray(
+        return \strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray(
             $this->lastCurlResponse,
-            $this->responseMimeType
+            $this->responseMimeType,
         ), $responseCode) : null;
     }
 
     /**
-     * Parse Raw IPEX response in several formats
+     * Parse Raw IPEX response in several formats.
      *
      * @param string $responseRaw raw response body
      *
@@ -490,79 +483,92 @@ class ApiClient extends \Ease\Brick
     {
         $responseDecoded = json_decode($responseRaw, true, 10);
         $decodeError = json_last_error_msg();
-        if ($decodeError != 'No error') {
-            $this->addStatusMessage('JSON Decoder: ' . $decodeError, 'error');
+
+        if ($decodeError !== 'No error') {
+            $this->addStatusMessage('JSON Decoder: '.$decodeError, 'error');
             $this->addStatusMessage($responseRaw, 'debug');
         }
+
         return $responseDecoded;
     }
 
     /**
-     * Parse Response array
+     * Parse Response array.
      *
      * @param array $responseDecoded
-     * @param int $responseCode Request Response Code
+     * @param int   $responseCode    Request Response Code
      *
      * @return array main data part of response
      */
     public function parseResponse($responseDecoded, $responseCode)
     {
         $response = null;
+
         switch ($responseCode) {
-            case 201: //Success Write
+            case 201: // Success Write
                 if (isset($responseDecoded[$this->resultField][0]['id'])) {
                     $this->lastInsertedID = $responseDecoded[$this->resultField][0]['id'];
                     $this->setMyKey($this->lastInsertedID);
-                    $this->apiURL = $this->getSectionURL() . '/' . $this->lastInsertedID;
+                    $this->apiURL = $this->getSectionURL().'/'.$this->lastInsertedID;
                 } else {
                     $this->lastInsertedID = null;
                 }
-            case 200: //Success Read
-                $response = $this->lastResult = $responseDecoded;
-                break;
 
+                // no break
+            case 200: // Success Read
+                $response = $this->lastResult = $responseDecoded;
+
+                break;
             case 500: // Internal Server Error
             case 404: // Page not found
                 if ($this->ignoreNotFound === true) {
                     break;
                 }
-            case 400: //Bad Request parameters
-            default: //Something goes wrong
+
+                // no break
+            case 400: // Bad Request parameters
+            default: // Something goes wrong
                 $this->addStatusMessage(
-                    $responseCode . ': ' . $this->curlInfo['url'],
-                    'warning'
+                    $responseCode.': '.$this->curlInfo['url'],
+                    'warning',
                 );
-                if (is_array($responseDecoded)) {
+
+                if (\is_array($responseDecoded)) {
                     $this->parseError($responseDecoded);
                 }
+
                 $this->logResult($responseDecoded, $this->curlInfo['url']);
+
                 break;
         }
+
         return $response;
     }
 
     /**
-     * Parse error message response
-     *
-     * @param array $responseDecoded
+     * Parse error message response.
      *
      * @return int number of errors processed
      */
     public function parseError(array $responseDecoded)
     {
-        $message = $responseDecoded['statusCode'] . ': ';
-        if (array_key_exists('error', $responseDecoded)) {
+        $message = $responseDecoded['statusCode'].': ';
+
+        if (\array_key_exists('error', $responseDecoded)) {
             $message .= $responseDecoded['error'];
         }
-        if (array_key_exists('message', $responseDecoded)) {
-            $message .= ' ' . $responseDecoded['message'];
+
+        if (\array_key_exists('message', $responseDecoded)) {
+            $message .= ' '.$responseDecoded['message'];
         }
+
         $this->addStatusMessage($message, 'error');
+
         return 1;
     }
 
     /**
-     * Vykonej HTTP požadavek
+     * Vykonej HTTP požadavek.
      *
      * @param string $url    URL požadavku
      * @param string $method HTTP Method GET|POST|PUT|OPTIONS|DELETE
@@ -572,17 +578,19 @@ class ApiClient extends \Ease\Brick
      */
     public function doCurlRequest($url, $method, $format = null)
     {
-        if (is_null($format)) {
+        if (null === $format) {
             $format = $this->format;
         }
-        curl_setopt($this->curl, CURLOPT_URL, $url);
-// Nastavení samotné operace
-        curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, strtoupper($method));
-//Vždy nastavíme byť i prázná postdata jako ochranu před chybou 411
-        curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->postFields);
+
+        curl_setopt($this->curl, \CURLOPT_URL, $url);
+        // Nastavení samotné operace
+        curl_setopt($this->curl, \CURLOPT_CUSTOMREQUEST, strtoupper($method));
+        // Vždy nastavíme byť i prázná postdata jako ochranu před chybou 411
+        curl_setopt($this->curl, \CURLOPT_POSTFIELDS, $this->postFields);
 
         $httpHeaders = $this->defaultHttpHeaders;
-        if (!is_null($this->tokener)) {
+
+        if (isset($this->tokener)) {
             $httpHeaders['Authorization'] = $this->getTokenString();
         }
 
@@ -591,20 +599,24 @@ class ApiClient extends \Ease\Brick
         if (!isset($httpHeaders['Accept'])) {
             $httpHeaders['Accept'] = $formats[$format]['content-type'];
         }
+
         if (!isset($httpHeaders['Content-Type'])) {
             $httpHeaders['Content-Type'] = $formats[$format]['content-type'];
         }
+
         $httpHeadersFinal = [];
+
         foreach ($httpHeaders as $key => $value) {
-            if (($key == 'User-Agent') && ($value == 'IPEXB2B')) {
-                $value .= ' v' . self::$libVersion;
+            if (($key === 'User-Agent') && ($value === 'IPEXB2B')) {
+                $value .= ' v'.self::$libVersion;
             }
-            $httpHeadersFinal[] = $key . ': ' . $value;
+
+            $httpHeadersFinal[] = $key.': '.$value;
         }
 
-        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $httpHeadersFinal);
+        curl_setopt($this->curl, \CURLOPT_HTTPHEADER, $httpHeadersFinal);
 
-// Proveď samotnou operaci
+        // Proveď samotnou operaci
         $this->lastCurlResponse = curl_exec($this->curl);
         $this->curlInfo = curl_getinfo($this->curl);
         $this->curlInfo['when'] = microtime();
@@ -612,11 +624,12 @@ class ApiClient extends \Ease\Brick
         $this->responseMimeType = $this->curlInfo['content_type'];
         $this->lastResponseCode = $this->curlInfo['http_code'];
         $this->lastCurlError = curl_error($this->curl);
-        if (strlen($this->lastCurlError)) {
+
+        if (\strlen($this->lastCurlError)) {
             $this->addStatusMessage(sprintf(
                 'Curl Error (HTTP %d): %s',
                 $this->lastResponseCode,
-                $this->lastCurlError
+                $this->lastCurlError,
             ), 'error');
         }
 
@@ -624,7 +637,7 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * Load Data Row from IPEX
+     * Load Data Row from IPEX.
      *
      * @param string $key what we want to get
      *
@@ -632,7 +645,7 @@ class ApiClient extends \Ease\Brick
      */
     public function loadFromIPEX($key)
     {
-        return $this->takeData($this->requestData(is_array($key) ? \Ease\Functions::addUrlParams('', $key) : $key));
+        return $this->takeData($this->requestData(\is_array($key) ? \Ease\Functions::addUrlParams('', $key) : $key));
     }
 
     /**
@@ -641,21 +654,24 @@ class ApiClient extends \Ease\Brick
      * @param array  $resultData
      * @param string $url        URL
      *
-     * @return boolean Log save success
+     * @return bool Log save success
      */
     public function logResult($resultData = null, $url = null)
     {
         $logResult = false;
-        if (is_null($resultData)) {
+
+        if (null === $resultData) {
             $resultData = $this->lastResult;
         }
+
         if (isset($url)) {
             $this->addStatusMessage(urldecode($url));
         }
-        if (array_key_exists('message', $resultData)) {
+
+        if (\array_key_exists('message', $resultData)) {
             $this->addStatusMessage(
-                $resultData['statusCode'] . ': ' . $resultData['message'],
-                'warning'
+                $resultData['statusCode'].': '.$resultData['message'],
+                'warning',
             );
         }
 
@@ -663,22 +679,22 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * IpexAPI dateTime to PHP DateTime
+     * IpexAPI dateTime to PHP DateTime.
      *
      * @param string $ipexdatetime ( 2017-09-21T18:02:44.120Z )
      *
-     * @return \DateTime | false
+     * @return \DateTime|false
      */
     public static function ipexDateTimeToDateTime($ipexdatetime)
     {
         return \DateTime::createFromFormat(
-            'Y-m-d H:i:s.u',
-            str_replace('Z', '', str_replace('T', ' ', $ipexdatetime))
+            '!Y-m-d H:i:s.u',
+            str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)),
         );
     }
 
     /**
-     * Return Day in IpexAPI format
+     * Return Day in IpexAPI format.
      *
      * @param \DateTime $dateTime
      *
@@ -690,7 +706,7 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * Current Token String
+     * Current Token String.
      *
      * @return string
      */
@@ -700,44 +716,30 @@ class ApiClient extends \Ease\Brick
     }
 
     /**
-     * Set or get ignore not found pages flag
+     * Set or get ignore not found pages flag.
      *
-     * @param boolean $ignore set flag to
+     * @param bool $ignore set flag to
      *
-     * @return boolean get flag state
+     * @return bool get flag state
      */
     public function ignore404($ignore = null)
     {
-        if (!is_null($ignore)) {
+        if (null !== $ignore) {
             $this->ignoreNotFound = $ignore;
         }
+
         return $this->ignoreNotFound;
     }
 
     /**
      * Odpojení od IPEX.
      */
-    public function disconnect()
+    public function disconnect(): void
     {
-        if (is_resource($this->curl)) {
+        if (\is_resource($this->curl)) {
             curl_close($this->curl);
         }
+
         $this->curl = null;
-    }
-
-    /**
-     * Reconnect After unserialization
-     */
-    public function __wakeup()
-    {
-        $this->curlInit();
-    }
-
-    /**
-     * Disconnect CURL befere pass away
-     */
-    public function __destruct()
-    {
-        $this->disconnect();
     }
 }

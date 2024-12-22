@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * IPEXB2B - Client for Access to IPEX Rights class.
+ * This file is part of the IpexB2B package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  (C) 2017 Spoje.Net
+ * https://github.com/Spoje-NET/ipex-b2b
+ *
+ * (c) Spoje.Net <https://spoje.net>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace IPEXB2B;
@@ -18,17 +24,15 @@ class Calls extends ApiClient
 {
     /**
      * Sekce užitá objektem.
-     * Section used by object
-     *
-     * @var string
+     * Section used by object.
      */
-    public $section = 'calls';
+    public string $section = 'calls';
 
     /**
-     * Obtain calls listing for give phone number
+     * Obtain calls listing for give phone number.
      *
-     * @param string    $telNo
      * @param \DateTime $dateFrom Start Day of results
+     * @param string    $telNo
      *
      * @return array
      */
@@ -36,15 +40,15 @@ class Calls extends ApiClient
     {
         return $this->requestData(\Ease\Functions::addUrlParams(
             '',
-            ['number' => $telNo, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)]
+            ['number' => $telNo, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)],
         ));
     }
 
     /**
-     * Obtain call list for customer
+     * Obtain call list for customer.
      *
-     * @param int $customerId
-     * @param \DateTime $dateFrom Start Day of results
+     * @param \DateTime $dateFrom   Start Day of results
+     * @param int       $customerId
      *
      * @return array
      */
@@ -52,7 +56,7 @@ class Calls extends ApiClient
     {
         return $this->requestData(\Ease\Functions::addUrlParams(
             '',
-            ['customerId' => $customerId, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)]
+            ['customerId' => $customerId, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)],
         ));
     }
 }

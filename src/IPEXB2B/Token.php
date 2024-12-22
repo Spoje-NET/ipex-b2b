@@ -1,60 +1,62 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * IPEXB2B - Client for Access to IPEX Rights class.
+ * This file is part of the IpexB2B package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  (C) 2017 Spoje.Net
+ * https://github.com/Spoje-NET/ipex-b2b
+ *
+ * (c) Spoje.Net <https://spoje.net>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace IPEXB2B;
 
 /**
- * Základní třída pro čtení z IPEX
+ * Základní třída pro čtení z IPEX.
  *
  * @url https://restapi.ipex.cz/documentation#/
  */
 class Token extends ApiClient
 {
     /**
-     * Saves obejct instace (singleton...).
-     *
-     * @var Shared
-     */
-    private static $_instance = null;
-
-    /**
      * Sekce užitá objektem.
-     * Section used by object
-     *
-     * @var string
+     * Section used by object.
      */
-    public $section = 'token';
+    public string $section = 'token';
 
     /**
-     * Token
+     * Saves object instance (singleton...).
+     */
+    private static self $_instance;
+
+    /**
+     * Token.
      *
      * @param mixed $init
      * @param array $options
      */
-    public function __construct($init = null, $options = array())
+    public function __construct($init = '', $options = [])
     {
         parent::__construct($init, $options);
         $this->refreshToken();
     }
 
     /**
-     * Refresh Access Token
+     * Refresh Access Token.
      *
-     * @return boolean refresh
+     * @return bool refresh
      */
     public function refreshToken()
     {
-        return $this->setData($this->getToken()) == 2;
+        return $this->setData($this->getToken()) === 2;
     }
 
     /**
-     * Always fresh Access token string
+     * Always fresh Access token string.
      *
      * @return string
      */
@@ -63,22 +65,25 @@ class Token extends ApiClient
         if ($this->isExpired()) {
             $this->refreshToken();
         }
+
         return $this->getDataValue('accessToken');
     }
 
     /**
-     * Check Access Token expiration state
+     * Check Access Token expiration state.
      *
-     * @return boolean
+     * @return bool
      */
     public function isExpired()
     {
         $expire = $this->ipexDateTimeToDateTime($this->getDataValue('expire'));
-        if (is_object($expire)) {
-            $tdiff  = $expire->getTimestamp() - time();
+
+        if (\is_object($expire)) {
+            $tdiff = $expire->getTimestamp() - time();
         } else {
             $tdiff = 0;
         }
+
         return $tdiff < 5;
     }
 
@@ -87,10 +92,13 @@ class Token extends ApiClient
         if (empty($this->user)) {
             throw new \Ease\Exception(_('Username not set!'));
         }
+
         if (empty($this->password)) {
             throw new \Ease\Exception(_('Password not set!'));
         }
+
         $this->setPostFields(json_encode(['username' => $this->user, 'password' => $this->password]));
+
         return $this->requestData('', 'POST');
     }
 
@@ -98,16 +106,14 @@ class Token extends ApiClient
      * Pri vytvareni objektu pomoci funkce singleton (ma stejne parametry, jako konstruktor)
      * se bude v ramci behu programu pouzivat pouze jedna jeho Instance (ta prvni).
      *
-     * @param string $class název třídy jenž má být zinstancována
-     *
-     * @link   http://docs.php.net/en/language.oop5.patterns.html Dokumentace a priklad
+     * @see   http://docs.php.net/en/language.oop5.patterns.html Dokumentace a priklad
      *
      * @return self
      */
     public static function singleton()
     {
         if (!isset(self::$_instance)) {
-            $class           = __CLASS__;
+            $class = __CLASS__;
             self::$_instance = new $class();
         }
 

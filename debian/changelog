@@ -1,4 +1,10 @@
-php-spojenet-ipex-b2b (1.1) UNRELEASED; urgency=low
+php-spojenet-ipex-b2b (1.2.0) UNRELEASED; urgency=medium
+
+  * moderinized
+
+ -- vitex <info@vitexsoftware.cz>  Mon, 23 Dec 2024 00:00:00 +0100
+
+php-spojenet-ipex-b2b (1.1) unstable; urgency=low
 
   [ Vítězslav Dvořák ]
   * Better Error Parsing
@@ -11,4 +17,4 @@ php-spojenet-ipex-b2b (1.1) UNRELEASED; urgency=low
   * updated for current ease core
   * Ease update
 
- -- vitex <info@vitexsoftware.cz>  Sun, 05 Dec 2021 18:14:59 +0100
+ -- vitex <info@vitexsoftware.cz>  Sun, 22 Dec 2024 23:59:52 +0100

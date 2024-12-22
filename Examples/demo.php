@@ -15,16 +15,8 @@ declare(strict_types=1);
 
 namespace IPEXB2B;
 
-/**
- * Základní třída pro čtení z IPEX.
- *
- * @url https://restapi.ipex.cz/documentation#/
- */
-class Services extends ApiClient
-{
-    /**
-     * Sekce užitá objektem.
-     * Section used by object.
-     */
-    public string $section = 'services';
-}
+require_once '../tests/bootstrap.php';
+
+$connector = new Rights();
+$rights = $connector->requestData();
+print_r($rights);
