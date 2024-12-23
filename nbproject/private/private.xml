@@ -22,9 +22,17 @@
             <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Rights.php</file>
         </group>
         <group>
-            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/src/IPEXB2B/Calls.php</file>
-            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/vendor/pear/mail_mime/Mail/mimePart.php</file>
-            <file>file:/home/vitex/Projects/EASE/php-spojenet-ipex-b2b/vendor/sebastian/recursion-context/src/InvalidArgumentException.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/composer.json</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/vendor/vitexsoftware/ease-core/src/Ease/Logger/ToSyslog.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/vendor/composer/ClassLoader.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/src/IPEXB2B/Token.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/tests/src/IPEXB2B/ApiClientTest.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/tests/src/IPEXB2B/CallsTest.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/Examples/demo.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/src/IPEXB2B/ApiClient.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/src/IPEXB2B/Rights.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/vendor/vitexsoftware/ease-core/src/Ease/Sand.php</file>
+            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/tests/bootstrap.php</file>
         </group>
     </open-files>
 </project-private>
