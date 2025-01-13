@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php": ">=8.0",
         "ext-curl": "*",
         "vitexsoftware/ease-core": "^1.45"
     },

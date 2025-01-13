@@ -15,30 +15,32 @@ declare(strict_types=1);
 
 namespace IPEXB2B;
 
+use DateTime;
+use Ease\Functions;
+
 /**
- * Výpis uskutečněných hovorů.
+ * List of calls made.
  *
  * @url https://restapi.ipex.cz/documentation#!/v1%2Fcalls/getV1Calls
  */
 class Calls extends ApiClient
 {
     /**
-     * Sekce užitá objektem.
-     * Section used by object.
+     * API Section used by object.
      */
     public string $section = 'calls';
 
     /**
      * Obtain calls listing for give phone number.
      *
-     * @param \DateTime $dateFrom Start Day of results
+     * @param DateTime $dateFrom Start Day of results
      * @param string    $telNo
      *
      * @return array
      */
-    public function getCallsForNumber($dateFrom, $telNo)
+    public function getCallsForNumber(DateTime $dateFrom, string $telNo): array|bool
     {
-        return $this->requestData(\Ease\Functions::addUrlParams(
+        return $this->requestData(Functions::addUrlParams(
             '',
             ['number' => $telNo, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)],
         ));
@@ -47,14 +49,14 @@ class Calls extends ApiClient
     /**
      * Obtain call list for customer.
      *
-     * @param \DateTime $dateFrom   Start Day of results
+     * @param DateTime $dateFrom   Start Day of results
      * @param int       $customerId
      *
      * @return array
      */
-    public function getCallsForCustomer($dateFrom, $customerId)
+    public function getCallsForCustomer(DateTime $dateFrom, int $customerId): array|bool
     {
-        return $this->requestData(\Ease\Functions::addUrlParams(
+        return $this->requestData(Functions::addUrlParams(
             '',
             ['customerId' => $customerId, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)],
         ));

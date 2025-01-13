@@ -15,14 +15,19 @@ declare(strict_types=1);
 
 namespace IPEXB2B;
 
+use DateTime;
+use Ease\Brick;
+use Ease\Functions;
+use Ease\Logger\Logging;
+
 /**
  * Základní třída pro čtení z IPEX.
  *
  * @url https://restapi.ipex.cz/documentation#/
  */
-class ApiClient extends \Ease\Brick
+class ApiClient extends Brick
 {
-    use \Ease\Logger\Logging;
+    use Logging;
 
     /**
      * Version of IPEXB2B library.
@@ -30,10 +35,9 @@ class ApiClient extends \Ease\Brick
     public static string $libVersion = '0.1.2';
 
     /**
-     * Verze protokolu použitého pro komunikaci.
      * Communication protocol version used.
      *
-     * @var string Verze použitého API
+     * @var string Version of the API used
      */
     public string $protoVersion = 'v1';
 
@@ -45,13 +49,11 @@ class ApiClient extends \Ease\Brick
     public string $apiURL;
 
     /**
-     * Datový blok v poli odpovědi.
-     * Data block in response field.
+    * Data block in response field.
      */
     public string $resultField = 'results';
 
     /**
-     * Evidence užitá objektem.
      * Evidence used by object.
      *
      * @see https://demo.ipex.eu/c/demo/section-list Přehled evidencí
@@ -59,7 +61,6 @@ class ApiClient extends \Ease\Brick
     public string $section = '';
 
     /**
-     * Výchozí formát pro komunikaci.
      * Default communication format.
      *
      * @see https://www.ipex.eu/api/dokumentace/ref/format-types Přehled možných formátů
@@ -69,7 +70,6 @@ class ApiClient extends \Ease\Brick
     public string $format = 'json';
 
     /**
-     * formát příchozí odpovědi
      * response format.
      *
      * @see https://www.ipex.eu/api/dokumentace/ref/format-types Přehled možných formátů
@@ -81,7 +81,7 @@ class ApiClient extends \Ease\Brick
     /**
      * Curl Handle.
      *
-     * @var resource
+     * @var \CurlHandle
      */
     public $curl;
 
@@ -229,9 +229,9 @@ class ApiClient extends \Ease\Brick
      * Class for read only interaction with IPEX.
      *
      * @param mixed $init    default record id or initial data
-     * @param array $options Connection settings override
+     * @param array<string,string> $options Connection settings override
      */
-    public function __construct($init = '', $options = [])
+    public function __construct(string $init = '', array $options = [])
     {
         $this->init = $init;
 
@@ -269,7 +269,7 @@ class ApiClient extends \Ease\Brick
      * @param array $options Object Options (company,url,user,password,section,
      *                       defaultUrlParams,debug)
      */
-    public function setUp($options = []): void
+    public function setUp(array $options = []): void
     {
         $this->setupProperty($options, 'url', 'IPEX_URL');
         $this->setupProperty($options, 'user', 'IPEX_LOGIN');
@@ -290,7 +290,7 @@ class ApiClient extends \Ease\Brick
      * @param string $prefix banner prefix text
      * @param string $suffix banner suffix text
      */
-    public function logBanner($prefix = null, $suffix = null): void
+    public function logBanner(string $prefix = '', $suffix = ''): void
     {
         parent::logBanner(
             $prefix,
@@ -300,6 +300,16 @@ class ApiClient extends \Ease\Brick
                 $this->getApiUrl(),
             ).' IpexB2B v'.self::$libVersion.$suffix,
         );
+    }
+
+    /**
+     * Return URL of used API.
+     *
+     * @return string
+     */
+    public function getApiUrl(): string
+    {
+        return $this->url;
     }
 
     /**
@@ -461,14 +471,13 @@ class ApiClient extends \Ease\Brick
             $url = $this->sectionUrlWithSuffix($urlSuffix);
         }
 
-        $responseCode = $this->doCurlRequest(\Ease\Functions::addUrlParams(
+        $responseCode = $this->doCurlRequest(Functions::addUrlParams(
             $url,
             $this->urlParams,
         ), $method, $format);
 
         return \strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray(
             $this->lastCurlResponse,
-            $this->responseMimeType,
         ), $responseCode) : null;
     }
 
@@ -645,7 +654,7 @@ class ApiClient extends \Ease\Brick
      */
     public function loadFromIPEX($key)
     {
-        return $this->takeData($this->requestData(\is_array($key) ? \Ease\Functions::addUrlParams('', $key) : $key));
+        return $this->takeData($this->requestData(\is_array($key) ? Functions::addUrlParams('', $key) : $key));
     }
 
     /**
@@ -683,11 +692,11 @@ class ApiClient extends \Ease\Brick
      *
      * @param string $ipexdatetime ( 2017-09-21T18:02:44.120Z )
      *
-     * @return \DateTime|false
+     * @return DateTime|false
      */
     public static function ipexDateTimeToDateTime($ipexdatetime)
     {
-        return \DateTime::createFromFormat(
+        return DateTime::createFromFormat(
             '!Y-m-d H:i:s.u',
             str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)),
         );
@@ -696,7 +705,7 @@ class ApiClient extends \Ease\Brick
     /**
      * Return Day in IpexAPI format.
      *
-     * @param \DateTime $dateTime
+     * @param DateTime $dateTime
      *
      * @return string
      */

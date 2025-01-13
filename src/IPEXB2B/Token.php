@@ -37,7 +37,7 @@ class Token extends ApiClient
      * Token.
      *
      * @param mixed $init
-     * @param array $options
+     * @param array<string,string> $options
      */
     public function __construct($init = '', $options = [])
     {
@@ -87,7 +87,7 @@ class Token extends ApiClient
         return $tdiff < 5;
     }
 
-    public function getToken()
+    public function getToken(): array|bool
     {
         if (empty($this->user)) {
             throw new \Ease\Exception(_('Username not set!'));

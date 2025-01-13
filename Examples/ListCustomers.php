@@ -4,7 +4,7 @@
  * IPEXB2B - Example how to check connection
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017 Vitex Software
+ * @copyright  (G) 2017-2025 SpojeNet s.r.o.
  */
 
 namespace Example\IPEXB2B;

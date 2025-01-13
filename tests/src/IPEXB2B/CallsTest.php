@@ -48,7 +48,7 @@ class CallsTest extends ApiClientTest
     {
         $startDate = new \DateTime();
         $startDate->modify('-1 month');
-        $calls = $this->object->getCallsForNumber($startDate, \constant('TEST_TEL_NUM'));
+        $calls = $this->object->getCallsForNumber($startDate, \Ease\Shared::cfg('TEST_TEL_NUM'));
     }
 
     /**
@@ -60,7 +60,7 @@ class CallsTest extends ApiClientTest
         $startDate->modify('-1 month');
         $calls = $this->object->getCallsForCustomer(
             $startDate,
-            \constant('TEST_CUSTOMER_ID'),
+            \Ease\Shared::cfg('TEST_CUSTOMER_ID'),
         );
     }
 }
