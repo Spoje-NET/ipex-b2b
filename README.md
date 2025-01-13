@@ -8,9 +8,6 @@ CZ: PHP Knihovna pro snadnou práci s Rest API [IPEX B2B](https://restapi.ipex.c
 [![Source Code](http://img.shields.io/badge/source/Spoje-NET/ipex-b2b-blue.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b)
 [![Latest Version](https://img.shields.io/github/release/Spoje-NET/ipex-b2b.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b/releases)
 [![Software License](https://img.shields.io/badge/license-GNU-brightgreen.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b/blob/master/LICENSE)
-[![Build Status](https://img.shields.io/travis/Spoje-NET/ipex-b2b/master.svg?style=flat-square)](https://travis-ci.org/Spoje-NET/ipex-b2b)
-[![Code Coverage](https://scrutinizer-ci.com/g/Spoje-NET/ipex-b2b/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Spoje-NET/ipex-b2b/?branch=master)
-[![Docker pulls](https://img.shields.io/docker/pulls/vitexsoftware/ipex-b2b.svg)](https://hub.docker.com/r/vitexsoftware/ipex-b2b/)
 [![Total Downloads](https://img.shields.io/packagist/dt/spoje.net/ipex-b2b.svg?style=flat-square)](https://packagist.org/packages/spoje.net/ipex-b2b)
 [![Latest stable](https://img.shields.io/packagist/v/spoje.net/ipex-b2b.svg?style=flat-square)](https://packagist.org/packages/spoje.net/ipex-b2b)
 
@@ -26,7 +23,7 @@ knihovny do vašich projektů.
 Instalace
 ---------
 
-    composer require spoje.net/ipexb2b
+    composer require spojenet/ipexb2b
 
 Konfigurace
 -----------
@@ -159,13 +156,3 @@ Takže při instalaci závislostí bude vypadat nějak takto:
         Symlinked from /usr/share/php/IPEXB2B
 
 A aktualizaci bude možné dělat globálně pro celý systém prostřednictvím apt-get.
-
-Sestavení
----------
-
-Debianí balíček vytvoříme spuštěním debian/deb-package.sh
-
-Obraz pro Docker:
-
-    docker build -t vitexsoftware/ipex-b2b
-
