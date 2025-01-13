@@ -56,25 +56,20 @@ class ApiClient extends Brick
     /**
      * Evidence used by object.
      *
-     * @see https://demo.ipex.eu/c/demo/section-list Přehled evidencí
+     * @see https://restapi.ipex.cz/documentation#/
      */
     public string $section = '';
 
     /**
      * Default communication format.
-     *
-     * @see https://www.ipex.eu/api/dokumentace/ref/format-types Přehled možných formátů
-     *
-     * @var string json|xml|...
+     * @var string json
      */
     public string $format = 'json';
 
     /**
      * response format.
      *
-     * @see https://www.ipex.eu/api/dokumentace/ref/format-types Přehled možných formátů
-     *
-     * @var string json|xml|...
+     * @var string json
      */
     public string $responseMimeType = 'json';
 
@@ -84,11 +79,6 @@ class ApiClient extends Brick
      * @var \CurlHandle
      */
     public $curl;
-
-    /**
-     * @see https://demo.ipex.eu/devdoc/company-identifier Identifikátor firmy
-     */
-    public string $company = '';
 
     /**
      * Server[:port].
@@ -112,11 +102,8 @@ class ApiClient extends Brick
 
     /**
      * Default additional request url parameters after question mark.
-     *
-     * @see https://www.ipex.eu/api/dokumentace/ref/urls   Common params
-     * @see https://www.ipex.eu/api/dokumentace/ref/paging Paging params
      */
-    public array $defaultUrlParams = ['limit' => 0];
+    public array $defaultUrlParams = [];
 
     /**
      * Identifikační řetězec.
@@ -196,14 +183,6 @@ class ApiClient extends Brick
      * @see https://demo.ipex.eu/c/demo/faktura-vydana/actions.json Např. Akce faktury
      */
     public array $actionsAvailable = [];
-
-    /**
-     * Parmetry pro URL.
-     *
-     * @see https://www.ipex.eu/api/dokumentace/ref/urls/ Všechny podporované parametry
-     */
-    public array $urlParams = [
-    ];
 
     /**
      * Body data  for next curl POST operation.
@@ -290,7 +269,7 @@ class ApiClient extends Brick
      * @param string $prefix banner prefix text
      * @param string $suffix banner suffix text
      */
-    public function logBanner(string $prefix = '', $suffix = ''): void
+    public function logBanner(/*string*/ $prefix = '',/*string*/ $suffix = ''): void
     {
         parent::logBanner(
             $prefix,
@@ -422,24 +401,6 @@ class ApiClient extends Brick
     }
 
     /**
-     * Add UrlParams to Requests URL.
-     *
-     * @param array $urlParams
-     *
-     * @return array all urlParams
-     */
-    public function setUrlParams($urlParams)
-    {
-        if (\is_array($this->urlParams)) {
-            $this->urlParams = array_merge($this->urlParams, $urlParams);
-        } else {
-            $this->urlParams = $urlParams;
-        }
-
-        return $this->urlParams;
-    }
-
-    /**
      * Update $this->apiURL.
      */
     public function updateApiURL(): void
@@ -471,10 +432,7 @@ class ApiClient extends Brick
             $url = $this->sectionUrlWithSuffix($urlSuffix);
         }
 
-        $responseCode = $this->doCurlRequest(Functions::addUrlParams(
-            $url,
-            $this->urlParams,
-        ), $method, $format);
+        $responseCode = $this->doCurlRequest($url, $method, $format);
 
         return \strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray(
             $this->lastCurlResponse,
