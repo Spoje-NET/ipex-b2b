@@ -185,6 +185,14 @@ class ApiClient extends Brick
     public array $actionsAvailable = [];
 
     /**
+     * Parmetry pro URL.
+     *
+     * @see https://www.ipex.eu/api/dokumentace/ref/urls/ Všechny podporované parametry
+     */
+    public array $urlParams = [
+    ];
+
+    /**
      * Body data  for next curl POST operation.
      */
     protected string $postFields = '';
@@ -401,6 +409,24 @@ class ApiClient extends Brick
     }
 
     /**
+     * Add UrlParams to Requests URL.
+     *
+     * @param array $urlParams
+     *
+     * @return array all urlParams
+     */
+    public function setUrlParams($urlParams)
+    {
+        if (\is_array($this->urlParams)) {
+            $this->urlParams = array_merge($this->urlParams, $urlParams);
+        } else {
+            $this->urlParams = $urlParams;
+        }
+
+        return $this->urlParams;
+    }
+
+    /**
      * Update $this->apiURL.
      */
     public function updateApiURL(): void
@@ -432,7 +458,10 @@ class ApiClient extends Brick
             $url = $this->sectionUrlWithSuffix($urlSuffix);
         }
 
-        $responseCode = $this->doCurlRequest($url, $method, $format);
+        $responseCode = $this->doCurlRequest(Functions::addUrlParams(
+            $url,
+            $this->urlParams,
+        ), $method, $format);
 
         return \strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray(
             $this->lastCurlResponse,
