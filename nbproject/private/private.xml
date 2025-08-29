@@ -21,11 +21,6 @@
             <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Calls.php</file>
             <file>file:/home/vitex/Projects/Spoje.Net/ipex-b2b/src/IPEXB2B/Rights.php</file>
         </group>
-        <group>
-            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/src/IPEXB2B/ApiClient.php</file>
-            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/src/IPEXB2B/Calls.php</file>
-            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/README.md</file>
-            <file>file:/home/vitex/Projects/SpojeNet/ipex-b2b/composer.json</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
