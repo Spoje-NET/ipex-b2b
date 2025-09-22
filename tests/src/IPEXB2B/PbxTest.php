@@ -29,6 +29,7 @@ class PbxTest extends TestCase
     public function testGetPbxInfo(): void
     {
         $pbx = $this->getMockBuilder(Pbx::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class PbxTest extends TestCase
     public function testCreatePbx(): void
     {
         $pbx = $this->getMockBuilder(Pbx::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class PbxTest extends TestCase
     public function testDeletePbx(): void
     {
         $pbx = $this->getMockBuilder(Pbx::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -84,6 +87,7 @@ class PbxTest extends TestCase
     public function testPatchPbx(): void
     {
         $pbx = $this->getMockBuilder(Pbx::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

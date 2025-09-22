@@ -29,6 +29,7 @@ class MobileTest extends TestCase
     public function testGetMobileNumber(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -48,6 +49,7 @@ class MobileTest extends TestCase
     public function testCreateMobileNumber(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -67,6 +69,7 @@ class MobileTest extends TestCase
     public function testUpdateMobileNumber(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -86,6 +89,7 @@ class MobileTest extends TestCase
     public function testGetAvailablePortationDates(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -104,6 +108,7 @@ class MobileTest extends TestCase
     public function testResetPostpaidLimit(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -122,6 +127,7 @@ class MobileTest extends TestCase
     public function testResetPostpaidLimitPut(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -140,6 +146,7 @@ class MobileTest extends TestCase
     public function testSuspendMobileNumber(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -158,6 +165,7 @@ class MobileTest extends TestCase
     public function testSuspendMobileNumberPut(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -176,6 +184,7 @@ class MobileTest extends TestCase
     public function testReactivateMobileNumber(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -194,6 +203,7 @@ class MobileTest extends TestCase
     public function testReactivateMobileNumberPut(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -212,6 +222,7 @@ class MobileTest extends TestCase
     public function testGetCreditHistory(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -230,6 +241,7 @@ class MobileTest extends TestCase
     public function testAddCredit(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -249,6 +261,7 @@ class MobileTest extends TestCase
     public function testChangeSimCard(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -267,6 +280,7 @@ class MobileTest extends TestCase
     public function testRenewSimCard(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -286,6 +300,7 @@ class MobileTest extends TestCase
     public function testDeactivateMobileNumber(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -305,6 +320,7 @@ class MobileTest extends TestCase
     public function testUpdateOku(): void
     {
         $mobile = $this->getMockBuilder(Mobile::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

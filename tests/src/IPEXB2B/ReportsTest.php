@@ -29,6 +29,7 @@ class ReportsTest extends TestCase
     public function testGetCustomersReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class ReportsTest extends TestCase
     public function testGetNumbersReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class ReportsTest extends TestCase
     public function testGetCtuReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -85,6 +88,7 @@ class ReportsTest extends TestCase
     public function testGetTopCustomersReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -104,6 +108,7 @@ class ReportsTest extends TestCase
     public function testGetCustomersCountReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -122,6 +127,7 @@ class ReportsTest extends TestCase
     public function testGetRequestsCountReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -141,6 +147,7 @@ class ReportsTest extends TestCase
     public function testGetZoomProviderReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -159,6 +166,7 @@ class ReportsTest extends TestCase
     public function testGetConnectorPhoneNumbersCountReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -177,6 +185,7 @@ class ReportsTest extends TestCase
     public function testGetCustomerServicesCountReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -196,6 +205,7 @@ class ReportsTest extends TestCase
     public function testGetCustomerRequestsCountReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -214,6 +224,7 @@ class ReportsTest extends TestCase
     public function testGetZoomCustomerReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -232,6 +243,7 @@ class ReportsTest extends TestCase
     public function testGetCustomerInvoicesSumReport(): void
     {
         $reports = $this->getMockBuilder(Reports::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

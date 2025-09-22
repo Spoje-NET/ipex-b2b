@@ -29,6 +29,7 @@ class AnalysisTest extends TestCase
     public function testGetConnectorAnalysis(): void
     {
         $analysis = $this->getMockBuilder(Analysis::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 

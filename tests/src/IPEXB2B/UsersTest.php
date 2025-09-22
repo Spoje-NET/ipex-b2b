@@ -29,6 +29,7 @@ class UsersTest extends TestCase
     public function testGetMe(): void
     {
         $users = $this->getMockBuilder(Users::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 

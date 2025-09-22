@@ -29,6 +29,7 @@ class HealthTest extends TestCase
     public function testGetHealth(): void
     {
         $health = $this->getMockBuilder(Health::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

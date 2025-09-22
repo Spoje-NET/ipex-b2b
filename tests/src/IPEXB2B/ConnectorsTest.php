@@ -29,6 +29,7 @@ class ConnectorsTest extends TestCase
     public function testGetConnectors(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class ConnectorsTest extends TestCase
     public function testCreateConnector(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class ConnectorsTest extends TestCase
     public function testGetConnectorsInvoices(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -85,6 +88,7 @@ class ConnectorsTest extends TestCase
     public function testGetConnectorById(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -103,6 +107,7 @@ class ConnectorsTest extends TestCase
     public function testUpdateConnector(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -122,6 +127,7 @@ class ConnectorsTest extends TestCase
     public function testGetConnectorInvoices(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -141,6 +147,7 @@ class ConnectorsTest extends TestCase
     public function testGetConnectorPhoneNumbers(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -160,6 +167,7 @@ class ConnectorsTest extends TestCase
     public function testPortInToConnector(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -179,6 +187,7 @@ class ConnectorsTest extends TestCase
     public function testOrderNewBlock(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -198,6 +207,7 @@ class ConnectorsTest extends TestCase
     public function testDeactivateConnector(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -217,6 +227,7 @@ class ConnectorsTest extends TestCase
     public function testUpdateConnectorPhoneNumber(): void
     {
         $connectors = $this->getMockBuilder(Connectors::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

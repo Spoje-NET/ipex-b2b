@@ -29,6 +29,7 @@ class ContainersTest extends TestCase
     public function testGetContainers(): void
     {
         $containers = $this->getMockBuilder(Containers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class ContainersTest extends TestCase
     public function testGetRoamingProfiles(): void
     {
         $containers = $this->getMockBuilder(Containers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -65,6 +67,7 @@ class ContainersTest extends TestCase
     public function testGetPhoneNumbers(): void
     {
         $containers = $this->getMockBuilder(Containers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -84,6 +87,7 @@ class ContainersTest extends TestCase
     public function testGetDataPacks(): void
     {
         $containers = $this->getMockBuilder(Containers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -103,6 +107,7 @@ class ContainersTest extends TestCase
     public function testGetFlatPacks(): void
     {
         $containers = $this->getMockBuilder(Containers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -122,6 +127,7 @@ class ContainersTest extends TestCase
     public function testGetSimcards(): void
     {
         $containers = $this->getMockBuilder(Containers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -141,6 +147,7 @@ class ContainersTest extends TestCase
     public function testPortIn(): void
     {
         $containers = $this->getMockBuilder(Containers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

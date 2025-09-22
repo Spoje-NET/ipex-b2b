@@ -29,6 +29,7 @@ class InvoicesTest extends TestCase
     public function testGetInvoices(): void
     {
         $invoices = $this->getMockBuilder(Invoices::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class InvoicesTest extends TestCase
     public function testGetInvoicesByPaymentType(): void
     {
         $invoices = $this->getMockBuilder(Invoices::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class InvoicesTest extends TestCase
     public function testGetInvoiceFile(): void
     {
         $invoices = $this->getMockBuilder(Invoices::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 

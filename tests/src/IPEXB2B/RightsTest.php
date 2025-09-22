@@ -29,6 +29,7 @@ class RightsTest extends TestCase
     public function testGetRights(): void
     {
         $rights = $this->getMockBuilder(Rights::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

@@ -29,9 +29,11 @@ class CustomersTest extends TestCase
     public function testGetCustomers(): void
     {
         $customers = $this->getMockBuilder(Customers::class)
-            ->onlyMethods(['requestData'])
+            ->disableOriginalConstructor()
+            ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
+        $customers->expects($this->once())->method('setUrlParams');
         $customers->expects($this->once())
             ->method('requestData')
             ->willReturn(['results' => [['id' => 1, 'name' => 'Test Customer']]]);
@@ -46,6 +48,7 @@ class CustomersTest extends TestCase
     public function testGetCustomerById(): void
     {
         $customers = $this->getMockBuilder(Customers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -64,6 +67,7 @@ class CustomersTest extends TestCase
     public function testCreateCustomer(): void
     {
         $customers = $this->getMockBuilder(Customers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -83,6 +87,7 @@ class CustomersTest extends TestCase
     public function testUpdateCustomer(): void
     {
         $customers = $this->getMockBuilder(Customers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -102,6 +107,7 @@ class CustomersTest extends TestCase
     public function testPatchCustomer(): void
     {
         $customers = $this->getMockBuilder(Customers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -121,6 +127,7 @@ class CustomersTest extends TestCase
     public function testGetCustomerNameById(): void
     {
         $customers = $this->getMockBuilder(Customers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -139,6 +146,7 @@ class CustomersTest extends TestCase
     public function testGetCustomerUsers(): void
     {
         $customers = $this->getMockBuilder(Customers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

@@ -29,6 +29,7 @@ class IctPriceListTest extends TestCase
     public function testGetIctPriceLists(): void
     {
         $ictPriceList = $this->getMockBuilder(IctPriceList::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class IctPriceListTest extends TestCase
     public function testCopyIctPriceList(): void
     {
         $ictPriceList = $this->getMockBuilder(IctPriceList::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class IctPriceListTest extends TestCase
     public function testGetIctPriceList(): void
     {
         $ictPriceList = $this->getMockBuilder(IctPriceList::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -84,6 +87,7 @@ class IctPriceListTest extends TestCase
     public function testPatchIctPriceList(): void
     {
         $ictPriceList = $this->getMockBuilder(IctPriceList::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -103,6 +107,7 @@ class IctPriceListTest extends TestCase
     public function testGetIctPriceListItem(): void
     {
         $ictPriceList = $this->getMockBuilder(IctPriceList::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -121,6 +126,7 @@ class IctPriceListTest extends TestCase
     public function testPatchIctPriceListItem(): void
     {
         $ictPriceList = $this->getMockBuilder(IctPriceList::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

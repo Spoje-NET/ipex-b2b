@@ -29,6 +29,7 @@ class SsoTest extends TestCase
     public function testGetTicketingToken(): void
     {
         $sso = $this->getMockBuilder(Sso::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class SsoTest extends TestCase
     public function testLogin(): void
     {
         $sso = $this->getMockBuilder(Sso::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class SsoTest extends TestCase
     public function testRefresh(): void
     {
         $sso = $this->getMockBuilder(Sso::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

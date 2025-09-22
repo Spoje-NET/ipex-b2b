@@ -29,6 +29,7 @@ class PhoneNumbersTest extends TestCase
     public function testGetPhoneNumbers(): void
     {
         $phoneNumbers = $this->getMockBuilder(PhoneNumbers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class PhoneNumbersTest extends TestCase
     public function testGetDiagnostic(): void
     {
         $phoneNumbers = $this->getMockBuilder(PhoneNumbers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class PhoneNumbersTest extends TestCase
     public function testCreateBlock(): void
     {
         $phoneNumbers = $this->getMockBuilder(PhoneNumbers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

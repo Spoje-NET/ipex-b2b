@@ -20,18 +20,12 @@ use PHPUnit\Framework\TestCase;
 
 class ApiClientTest extends TestCase
 {
-    protected ApiClient $object;
-
-    protected function setUp(): void
-    {
-        $this->object = new ApiClient();
-    }
-
     /**
      * @covers \IPEXB2B\ApiClient::setUp
      */
     public function testSetUp(): void
     {
+        $object = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
         $options = [
             'url' => 'https://test.ipex.cz',
             'user' => 'testuser',
@@ -40,13 +34,13 @@ class ApiClientTest extends TestCase
             'debug' => true,
             'defaultUrlParams' => ['limit' => 10],
         ];
-        $this->object->setUp($options);
-        $this->assertEquals('https://test.ipex.cz', $this->object->url);
-        $this->assertEquals('testuser', $this->object->user);
-        $this->assertEquals('testpass', $this->object->password);
-        $this->assertEquals('testsection', $this->object->getSection());
-        $this->assertEquals(['limit' => 10], $this->object->defaultUrlParams);
-        $this->assertTrue($this->object->debug);
+        $object->setUp($options);
+        $this->assertEquals('https://test.ipex.cz', $object->url);
+        $this->assertEquals('testuser', $object->user);
+        $this->assertEquals('testpass', $object->password);
+        $this->assertEquals('testsection', $object->getSection());
+        $this->assertEquals(['limit' => 10], $object->defaultUrlParams);
+        $this->assertTrue($object->debug);
     }
 
     /**
@@ -54,8 +48,9 @@ class ApiClientTest extends TestCase
      */
     public function testCurlInit(): void
     {
-        $this->object->curlInit();
-        $this->assertIsResource($this->object->curl);
+        $object = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
+        $object->curlInit();
+        $this->assertIsResource($object->curl);
     }
 
     /**
@@ -64,9 +59,10 @@ class ApiClientTest extends TestCase
      */
     public function testSetAndGetSection(): void
     {
+        $object = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
         $section = 'new-section';
-        $this->object->setSection($section);
-        $this->assertEquals($section, $this->object->getSection());
+        $object->setSection($section);
+        $this->assertEquals($section, $object->getSection());
     }
 
     /**
@@ -74,8 +70,14 @@ class ApiClientTest extends TestCase
      */
     public function testSetPostFields(): void
     {
+        $object = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
         $postData = '{"key":"value"}';
-        $this->assertEquals($postData, $this->object->setPostFields($postData));
+        $object->setPostFields($postData);
+
+        $reflection = new \ReflectionObject($object);
+        $property = $reflection->getProperty('postFields');
+        $property->setAccessible(true);
+        $this->assertEquals($postData, $property->getValue($object));
     }
 
     /**
@@ -83,9 +85,10 @@ class ApiClientTest extends TestCase
      */
     public function testGetSectionURL(): void
     {
-        $this->object->setUp(['url' => 'https://api.example.com']);
-        $this->object->setSection('items');
-        $this->assertEquals('https://api.example.com/v1/items', $this->object->getSectionURL());
+        $object = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
+        $object->setUp(['url' => 'https://api.example.com']);
+        $object->setSection('items');
+        $this->assertEquals('https://api.example.com/v1/items', $object->getSectionURL());
     }
 
     /**
@@ -93,11 +96,12 @@ class ApiClientTest extends TestCase
      */
     public function testSetUrlParams(): void
     {
-        $this->object->urlParams = [];
-        $this->object->setUrlParams(['a' => 'b']);
-        $this->assertEquals(['a' => 'b'], $this->object->urlParams);
-        $this->object->setUrlParams(['c' => 'd']);
-        $this->assertEquals(['a' => 'b', 'c' => 'd'], $this->object->urlParams);
+        $object = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
+        $object->urlParams = [];
+        $object->setUrlParams(['a' => 'b']);
+        $this->assertEquals(['a' => 'b'], $object->urlParams);
+        $object->setUrlParams(['c' => 'd']);
+        $this->assertEquals(['a' => 'b', 'c' => 'd'], $object->urlParams);
     }
 
 
@@ -126,9 +130,10 @@ class ApiClientTest extends TestCase
      */
     public function testIgnore404(): void
     {
-        $this->assertFalse($this->object->ignore404()); // Default is false
-        $this->assertTrue($this->object->ignore404(true));
-        $this->assertTrue($this->object->ignore404());
+        $object = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
+        $this->assertFalse($object->ignore404()); // Default is false
+        $this->assertTrue($object->ignore404(true));
+        $this->assertTrue($object->ignore404());
     }
 
     /**
@@ -136,8 +141,9 @@ class ApiClientTest extends TestCase
      */
     public function testDisconnect(): void
     {
-        $this->object->curlInit();
-        $this->object->disconnect();
-        $this->assertNull($this->object->curl);
+        $object = $this->getMockBuilder(ApiClient::class)->disableOriginalConstructor()->getMock();
+        $object->curlInit();
+        $object->disconnect();
+        $this->assertNull($object->curl);
     }
 }

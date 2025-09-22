@@ -29,6 +29,7 @@ class MaintenanceTest extends TestCase
     public function testCheckIncomeDrop(): void
     {
         $maintenance = $this->getMockBuilder(Maintenance::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

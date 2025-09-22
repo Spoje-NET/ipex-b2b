@@ -29,6 +29,7 @@ class InternetTest extends TestCase
     public function testGetInternetTypes(): void
     {
         $internet = $this->getMockBuilder(Internet::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class InternetTest extends TestCase
     public function testGetInternet(): void
     {
         $internet = $this->getMockBuilder(Internet::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -65,6 +67,7 @@ class InternetTest extends TestCase
     public function testCreateInternet(): void
     {
         $internet = $this->getMockBuilder(Internet::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -84,6 +87,7 @@ class InternetTest extends TestCase
     public function testPatchInternet(): void
     {
         $internet = $this->getMockBuilder(Internet::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

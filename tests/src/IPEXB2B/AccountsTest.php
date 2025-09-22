@@ -29,6 +29,7 @@ class AccountsTest extends TestCase
     public function testGetAccount(): void
     {
         $accounts = $this->getMockBuilder(Accounts::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class AccountsTest extends TestCase
     public function testUpdateAccount(): void
     {
         $accounts = $this->getMockBuilder(Accounts::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class AccountsTest extends TestCase
     public function testDeleteAccount(): void
     {
         $accounts = $this->getMockBuilder(Accounts::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -84,6 +87,7 @@ class AccountsTest extends TestCase
     public function testCreateAccount(): void
     {
         $accounts = $this->getMockBuilder(Accounts::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

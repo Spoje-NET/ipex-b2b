@@ -29,6 +29,7 @@ class RuianTest extends TestCase
     public function testGetAddresses(): void
     {
         $ruian = $this->getMockBuilder(Ruian::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -48,6 +49,7 @@ class RuianTest extends TestCase
     public function testGetAddressById(): void
     {
         $ruian = $this->getMockBuilder(Ruian::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

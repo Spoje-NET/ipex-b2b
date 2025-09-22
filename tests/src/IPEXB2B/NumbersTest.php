@@ -29,6 +29,7 @@ class NumbersTest extends TestCase
     public function testRefreshOku(): void
     {
         $numbers = $this->getMockBuilder(Numbers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

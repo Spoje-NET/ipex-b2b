@@ -30,9 +30,11 @@ class CallsTest extends TestCase
     public function testGetCallsForNumber(): void
     {
         $calls = $this->getMockBuilder(Calls::class)
-            ->onlyMethods(['requestData'])
+            ->disableOriginalConstructor()
+            ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
+        $calls->expects($this->once())->method('setUrlParams');
         $calls->expects($this->once())
             ->method('requestData')
             ->willReturn(['results' => [['id' => 1]]]);
@@ -48,9 +50,11 @@ class CallsTest extends TestCase
     public function testGetCallsForCustomer(): void
     {
         $calls = $this->getMockBuilder(Calls::class)
-            ->onlyMethods(['requestData'])
+            ->disableOriginalConstructor()
+            ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
+        $calls->expects($this->once())->method('setUrlParams');
         $calls->expects($this->once())
             ->method('requestData')
             ->willReturn(['results' => [['id' => 2]]]);
@@ -66,9 +70,11 @@ class CallsTest extends TestCase
     public function testGetTechnicalOverview(): void
     {
         $calls = $this->getMockBuilder(Calls::class)
-            ->onlyMethods(['requestData'])
+            ->disableOriginalConstructor()
+            ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
+        $calls->expects($this->once())->method('setUrlParams');
         $calls->expects($this->once())
             ->method('requestData')
             ->with('technical-overview')

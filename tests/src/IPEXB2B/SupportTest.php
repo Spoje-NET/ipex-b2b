@@ -29,6 +29,7 @@ class SupportTest extends TestCase
     public function testGetSupport(): void
     {
         $support = $this->getMockBuilder(Support::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class SupportTest extends TestCase
     public function testCreateSupport(): void
     {
         $support = $this->getMockBuilder(Support::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class SupportTest extends TestCase
     public function testPatchSupport(): void
     {
         $support = $this->getMockBuilder(Support::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

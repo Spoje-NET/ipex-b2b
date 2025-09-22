@@ -29,6 +29,7 @@ class SmsTest extends TestCase
     public function testSendSms(): void
     {
         $sms = $this->getMockBuilder(Sms::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -48,6 +49,7 @@ class SmsTest extends TestCase
     public function testGetSmsIntegration(): void
     {
         $sms = $this->getMockBuilder(Sms::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class SmsTest extends TestCase
     public function testUpdateSmsIntegration(): void
     {
         $sms = $this->getMockBuilder(Sms::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -85,6 +88,7 @@ class SmsTest extends TestCase
     public function testCreateSmsIntegration(): void
     {
         $sms = $this->getMockBuilder(Sms::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

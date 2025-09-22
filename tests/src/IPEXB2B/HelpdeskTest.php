@@ -29,6 +29,7 @@ class HelpdeskTest extends TestCase
     public function testGetHelpdesk(): void
     {
         $helpdesk = $this->getMockBuilder(Helpdesk::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class HelpdeskTest extends TestCase
     public function testCreateHelpdesk(): void
     {
         $helpdesk = $this->getMockBuilder(Helpdesk::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class HelpdeskTest extends TestCase
     public function testPatchHelpdesk(): void
     {
         $helpdesk = $this->getMockBuilder(Helpdesk::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

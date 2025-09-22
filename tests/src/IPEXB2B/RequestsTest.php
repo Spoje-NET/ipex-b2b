@@ -29,6 +29,7 @@ class RequestsTest extends TestCase
     public function testGetRequests(): void
     {
         $requests = $this->getMockBuilder(Requests::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class RequestsTest extends TestCase
     public function testGetRequestById(): void
     {
         $requests = $this->getMockBuilder(Requests::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -65,6 +67,7 @@ class RequestsTest extends TestCase
     public function testDeleteRequest(): void
     {
         $requests = $this->getMockBuilder(Requests::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

@@ -29,6 +29,7 @@ class AliveTest extends TestCase
     public function testGetAlive(): void
     {
         $alive = $this->getMockBuilder(Alive::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

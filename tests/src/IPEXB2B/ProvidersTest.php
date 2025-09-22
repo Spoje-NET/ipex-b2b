@@ -29,6 +29,7 @@ class ProvidersTest extends TestCase
     public function testGetSettings(): void
     {
         $providers = $this->getMockBuilder(Providers::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

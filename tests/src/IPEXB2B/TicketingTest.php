@@ -29,6 +29,7 @@ class TicketingTest extends TestCase
     public function testCheckUser(): void
     {
         $ticketing = $this->getMockBuilder(Ticketing::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

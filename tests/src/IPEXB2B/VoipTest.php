@@ -29,6 +29,7 @@ class VoipTest extends TestCase
     public function testGetVoipProfiles(): void
     {
         $voip = $this->getMockBuilder(Voip::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class VoipTest extends TestCase
     public function testGetVoipNumberDetails(): void
     {
         $voip = $this->getMockBuilder(Voip::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -66,6 +68,7 @@ class VoipTest extends TestCase
     public function testGetVoipCreditHistory(): void
     {
         $voip = $this->getMockBuilder(Voip::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -84,6 +87,7 @@ class VoipTest extends TestCase
     public function testAddVoipCredit(): void
     {
         $voip = $this->getMockBuilder(Voip::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -103,6 +107,7 @@ class VoipTest extends TestCase
     public function testGetVoipNumberState(): void
     {
         $voip = $this->getMockBuilder(Voip::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -122,6 +127,7 @@ class VoipTest extends TestCase
     public function testDeactivateVoipNumber(): void
     {
         $voip = $this->getMockBuilder(Voip::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -141,6 +147,7 @@ class VoipTest extends TestCase
     public function testCreateVoipNumber(): void
     {
         $voip = $this->getMockBuilder(Voip::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -160,6 +167,7 @@ class VoipTest extends TestCase
     public function testUpdateVoipNumber(): void
     {
         $voip = $this->getMockBuilder(Voip::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

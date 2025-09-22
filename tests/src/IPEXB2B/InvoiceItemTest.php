@@ -29,6 +29,7 @@ class InvoiceItemTest extends TestCase
     public function testGetInvoiceItemIds(): void
     {
         $invoiceItem = $this->getMockBuilder(InvoiceItem::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -47,6 +48,7 @@ class InvoiceItemTest extends TestCase
     public function testGetInvoiceItem(): void
     {
         $invoiceItem = $this->getMockBuilder(InvoiceItem::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 

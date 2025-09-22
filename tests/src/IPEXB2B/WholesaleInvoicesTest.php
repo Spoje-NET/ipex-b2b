@@ -29,6 +29,7 @@ class WholesaleInvoicesTest extends TestCase
     public function testGetWholesaleInvoices(): void
     {
         $wholesaleInvoices = $this->getMockBuilder(WholesaleInvoices::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 

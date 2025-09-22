@@ -29,6 +29,7 @@ class FreeUnitsTest extends TestCase
     public function testGetHistory(): void
     {
         $freeUnits = $this->getMockBuilder(FreeUnits::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 

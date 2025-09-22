@@ -29,9 +29,11 @@ class ServicesTest extends TestCase
     public function testGetServices(): void
     {
         $services = $this->getMockBuilder(Services::class)
-            ->onlyMethods(['requestData'])
+            ->disableOriginalConstructor()
+            ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
+        $services->expects($this->once())->method('setUrlParams');
         $services->expects($this->once())
             ->method('requestData')
             ->willReturn(['results' => [['id' => 1, 'name' => 'Test Service']]]);
@@ -46,6 +48,7 @@ class ServicesTest extends TestCase
     public function testGetServiceById(): void
     {
         $services = $this->getMockBuilder(Services::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -64,6 +67,7 @@ class ServicesTest extends TestCase
     public function testDeleteService(): void
     {
         $services = $this->getMockBuilder(Services::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -82,6 +86,7 @@ class ServicesTest extends TestCase
     public function testFulltextSearch(): void
     {
         $services = $this->getMockBuilder(Services::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -101,6 +106,7 @@ class ServicesTest extends TestCase
     public function testGetSharedServices(): void
     {
         $services = $this->getMockBuilder(Services::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -120,6 +126,7 @@ class ServicesTest extends TestCase
     public function testGetServiceProperties(): void
     {
         $services = $this->getMockBuilder(Services::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData'])
             ->getMock();
 
@@ -138,6 +145,7 @@ class ServicesTest extends TestCase
     public function testUpdateServiceProperties(): void
     {
         $services = $this->getMockBuilder(Services::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 
@@ -157,6 +165,7 @@ class ServicesTest extends TestCase
     public function testBindSystemUser(): void
     {
         $services = $this->getMockBuilder(Services::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setPostFields'])
             ->getMock();
 

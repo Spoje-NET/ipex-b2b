@@ -29,6 +29,7 @@ class TariffPlansTest extends TestCase
     public function testGetTariffPlan(): void
     {
         $tariffPlans = $this->getMockBuilder(TariffPlans::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -48,6 +49,7 @@ class TariffPlansTest extends TestCase
     public function testGetTariffPlanPrice(): void
     {
         $tariffPlans = $this->getMockBuilder(TariffPlans::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
@@ -67,6 +69,7 @@ class TariffPlansTest extends TestCase
     public function testGetTrunkTypes(): void
     {
         $tariffPlans = $this->getMockBuilder(TariffPlans::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['requestData', 'setUrlParams'])
             ->getMock();
 
