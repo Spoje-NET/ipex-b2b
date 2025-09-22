@@ -16,23 +16,23 @@ declare(strict_types=1);
 namespace IPEXB2B;
 
 /**
- * This class handles operations related to user rights.
+ * This class handles operations related to system health.
  *
- * @url https://restapi.ipex.cz/documentation#!/v1%2Frights/getV1Rights
+ * @url https://restapi.ipex.cz/documentation#!/health
  */
-class Rights extends ApiClient
+class Health extends ApiClient
 {
     /**
-     * The API section for rights.
+     * The API section for health.
      */
-    public string $section = 'v1/rights';
+    public string $section = 'health';
 
     /**
-     * Get a list of the current user's permissions.
+     * Get the status of dependent systems.
      *
-     * @return array|bool An array of rights data or false on failure.
+     * @return array|bool An array of health data or false on failure.
      */
-    public function getRights(): array|bool
+    public function getHealth(): array|bool
     {
         return $this->requestData();
     }
