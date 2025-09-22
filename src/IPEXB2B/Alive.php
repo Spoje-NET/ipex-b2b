@@ -16,23 +16,23 @@ declare(strict_types=1);
 namespace IPEXB2B;
 
 /**
- * This class handles operations related to user rights.
+ * This class handles the alive check.
  *
- * @url https://restapi.ipex.cz/documentation#!/v1%2Frights/getV1Rights
+ * @url https://restapi.ipex.cz/documentation#!/alive
  */
-class Rights extends ApiClient
+class Alive extends ApiClient
 {
     /**
-     * The API section for rights.
+     * The API section for the alive check.
      */
-    public string $section = 'v1/rights';
+    public string $section = 'alive';
 
     /**
-     * Get a list of the current user's permissions.
+     * Perform an alive check.
      *
-     * @return array|bool An array of rights data or false on failure.
+     * @return array|bool An array with the alive status or false on failure.
      */
-    public function getRights(): array|bool
+    public function getAlive(): array|bool
     {
         return $this->requestData();
     }
