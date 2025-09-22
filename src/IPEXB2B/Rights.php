@@ -16,15 +16,24 @@ declare(strict_types=1);
 namespace IPEXB2B;
 
 /**
- * Základní třída pro čtení z IPEX.
+ * This class handles operations related to user rights.
  *
- * @url https://restapi.ipex.cz/documentation#/
+ * @url https://restapi.ipex.cz/documentation#!/v1%2Frights/getV1Rights
  */
 class Rights extends ApiClient
 {
     /**
-     * Sekce užitá objektem.
-     * Section used by object.
+     * The API section for rights.
      */
-    public string $section = 'rights';
+    public string $section = 'v1/rights';
+
+    /**
+     * Get a list of the current user's permissions.
+     *
+     * @return array|bool An array of rights data or false on failure.
+     */
+    public function getRights(): array|bool
+    {
+        return $this->requestData();
+    }
 }
