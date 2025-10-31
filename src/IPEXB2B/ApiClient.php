@@ -21,7 +21,7 @@ use Ease\Functions;
 use Ease\Logger\Logging;
 
 /**
- * Základní třída pro čtení z IPEX.
+ * Base class for reading from IPEX.
  *
  * @url https://restapi.ipex.cz/documentation#/
  */
@@ -96,7 +96,7 @@ class ApiClient extends Brick
     public string $password = '';
 
     /**
-     * @var array Pole HTTP hlaviček odesílaných s každým požadavkem
+     * @var array Array of HTTP headers sent with every request.
      */
     public array $defaultHttpHeaders = ['User-Agent' => 'IPEXB2B'];
 
@@ -106,37 +106,37 @@ class ApiClient extends Brick
     public array $defaultUrlParams = [];
 
     /**
-     * Identifikační řetězec.
+     * Identification string.
      */
     public string $init = '';
 
     /**
-     * Sloupeček s názvem.
+     * Column with name.
      */
     public string $nameColumn = 'nazev';
 
     /**
-     * Sloupeček obsahující datum vložení záznamu do shopu.
+     * The column containing the date the record was inserted into the e-shop.
      */
     public string $myCreateColumn = 'false';
 
     /**
-     * Slopecek obsahujici datum poslení modifikace záznamu do shopu.
+     * The column containing the date of the last modification of the record to the e-shop.
      */
     public string $myLastModifiedColumn = 'lastUpdate';
 
     /**
-     * Klíčový idendifikátor záznamu.
+     * Key record identifier.
      */
     public string $fbKeyColumn = 'id';
 
     /**
-     * Informace o posledním HTTP requestu.
+     * Information about the last HTTP request.
      */
     public ?array $curlInfo = null;
 
     /**
-     * Informace o poslední HTTP chybě.
+     * Information about the last HTTP error.
      */
     public string $lastCurlError = '';
 
@@ -178,16 +178,16 @@ class ApiClient extends Brick
     public string $filter;
 
     /**
-     * Pole akcí které podporuje ta která section.
+     * An array of actions supported by that section.
      *
-     * @see https://demo.ipex.eu/c/demo/faktura-vydana/actions.json Např. Akce faktury
+     * @see https://demo.ipex.eu/c/demo/faktura-vydana/actions.json E.g. Invoice actions
      */
     public array $actionsAvailable = [];
 
     /**
-     * Parmetry pro URL.
+     * Parameters for URL.
      *
-     * @see https://www.ipex.eu/api/dokumentace/ref/urls/ Všechny podporované parametry
+     * @see https://www.ipex.eu/api/dokumentace/ref/urls/ All supported parameters
      */
     public array $urlParams = [
     ];
@@ -198,7 +198,7 @@ class ApiClient extends Brick
     protected string $postFields = '';
 
     /**
-     * @see https://demo.ipex.eu/devdoc/actions Provádění akcí
+     * @see https://demo.ipex.eu/devdoc/actions Performing actions
      */
     protected string $action;
 
@@ -300,7 +300,7 @@ class ApiClient extends Brick
     }
 
     /**
-     * Inicializace CURL.
+     * CURL initialization.
      */
     public function curlInit(): void
     {
@@ -314,15 +314,15 @@ class ApiClient extends Brick
     }
 
     /**
-     * Zinicializuje objekt dle daných dat. Možné hodnoty:
+     * Initializes the object according to the given data. Possible values:
      *
-     *  * 234                              - interní číslo záznamu k načtení
-     *  * code:LOPATA                      - kód záznamu
-     *  * BAGR                             - kód záznamu ka načtení
-     *  * ['id'=>24,'nazev'=>'hoblík']     - pole hodnot k předvyplnění
-     *  * 743.json?relations=adresa,vazby  - část url s parametry k načtení
+     *  * 234                              - internal record number to be loaded
+     *  * code:LOPATA                      - record code
+     *  * BAGR                             - record code to load
+     *  * ['id'=>24,'nazev'=>'hoblík']     - array of values to pre-fill
+     *  * 743.json?relations=adresa,vazby  - part of the url with the parameters to be loaded
      *
-     * @param mixed $init číslo/"(code:)kód"/(část)URI záznamu k načtení | pole hodnot k předvyplnění
+     * @param mixed $init number/"(code:)code"/(part)URI of the record to be loaded | array of values to pre-fill
      */
     public function processInit($init): void
     {
@@ -332,7 +332,6 @@ class ApiClient extends Brick
     }
 
     /**
-     * Nastaví Sekci pro Komunikaci.
      * Set section for communication.
      *
      * @param string $section section pathName to use
@@ -347,7 +346,6 @@ class ApiClient extends Brick
     }
 
     /**
-     * Vrací právě používanou evidenci pro komunikaci
      * Obtain current used section.
      *
      * @return string
@@ -358,7 +356,7 @@ class ApiClient extends Brick
     }
 
     /**
-     * Připraví data pro odeslání do FlexiBee.
+     * Prepare data for sending to FlexiBee.
      *
      * @param string $data
      *
@@ -435,13 +433,13 @@ class ApiClient extends Brick
     }
 
     /**
-     * Funkce, která provede I/O operaci a vyhodnotí výsledek.
+     * A function that performs an I/O operation and evaluates the result.
      *
-     * @param string $urlSuffix část URL za identifikátorem firmy
-     * @param string $method    HTTP/REST metoda
+     * @param string $urlSuffix URL part after the company identifier
+     * @param string $method    HTTP/REST method
      * @param string $format    Requested format
      *
-     * @return array|bool Výsledek operace
+     * @return array|bool Operation result
      */
     public function requestData(
         $urlSuffix = '',
@@ -564,11 +562,11 @@ class ApiClient extends Brick
     }
 
     /**
-     * Vykonej HTTP požadavek.
+     * Execute an HTTP request.
      *
-     * @param string $url    URL požadavku
+     * @param string $url    Request URL
      * @param string $method HTTP Method GET|POST|PUT|OPTIONS|DELETE
-     * @param string $format požadovaný formát komunikace
+     * @param string $format required communication format
      *
      * @return int HTTP Response CODE
      */
@@ -579,9 +577,9 @@ class ApiClient extends Brick
         }
 
         curl_setopt($this->curl, \CURLOPT_URL, $url);
-        // Nastavení samotné operace
+        // Setting up the operation itself
         curl_setopt($this->curl, \CURLOPT_CUSTOMREQUEST, strtoupper($method));
-        // Vždy nastavíme byť i prázná postdata jako ochranu před chybou 411
+        // We always set even empty postdata as a protection against error 411
         curl_setopt($this->curl, \CURLOPT_POSTFIELDS, $this->postFields);
 
         $httpHeaders = $this->defaultHttpHeaders;
@@ -612,7 +610,7 @@ class ApiClient extends Brick
 
         curl_setopt($this->curl, \CURLOPT_HTTPHEADER, $httpHeadersFinal);
 
-        // Proveď samotnou operaci
+        // Perform the operation itself
         $this->lastCurlResponse = curl_exec($this->curl);
         $this->curlInfo = curl_getinfo($this->curl);
         $this->curlInfo['when'] = microtime();
@@ -647,6 +645,7 @@ class ApiClient extends Brick
     /**
      * Write Operation Result.
      *
+     .
      * @param array  $resultData
      * @param string $url        URL
      *
@@ -728,7 +727,7 @@ class ApiClient extends Brick
     }
 
     /**
-     * Odpojení od IPEX.
+     * Disconnecting from IPEX.
      */
     public function disconnect(): void
     {

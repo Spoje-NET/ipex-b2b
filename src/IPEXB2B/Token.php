@@ -16,51 +16,54 @@ declare(strict_types=1);
 namespace IPEXB2B;
 
 /**
- * Základní třída pro čtení z IPEX.
+ * Class for obtaining and managing API access tokens.
  *
  * @url https://restapi.ipex.cz/documentation#/
  */
 class Token extends ApiClient
 {
     /**
-     * Sekce užitá objektem.
-     * Section used by object.
+     * The API section used by this object.
      */
     public string $section = 'token';
 
     /**
-     * Saves object instance (singleton...).
+     * Saves the object instance for the singleton pattern.
      */
-    private static self $_instance;
+    private static ?self $_instance = null;
 
     /**
-     * Token.
+     * Token constructor.
      *
      * @param mixed $init
      * @param array<string,string> $options
      */
-    public function __construct($init = '', $options = [])
+    public function __construct($init = '', array $options = [])
     {
         parent::__construct($init, $options);
         $this->refreshToken();
     }
 
     /**
-     * Refresh Access Token.
+     * Refresh the access token.
      *
-     * @return bool refresh
+     * @return bool Returns true on success.
      */
-    public function refreshToken()
+    public function refreshToken(): bool
     {
-        return $this->setData($this->getToken()) === 2;
+        $tokenData = $this->getToken();
+        if ($tokenData) {
+            return $this->setData($tokenData);
+        }
+        return false;
     }
 
     /**
-     * Always fresh Access token string.
+     * Provides a always valid access token string.
      *
-     * @return string
+     * @return string|null
      */
-    public function getTokenString()
+    public function getTokenString(): ?string
     {
         if ($this->isExpired()) {
             $this->refreshToken();
@@ -70,15 +73,20 @@ class Token extends ApiClient
     }
 
     /**
-     * Check Access Token expiration state.
+     * Check the access token's expiration state.
      *
      * @return bool
      */
-    public function isExpired()
+    public function isExpired(): bool
     {
-        $expire = $this->ipexDateTimeToDateTime($this->getDataValue('expire'));
+        $expireValue = $this->getDataValue('expiresAt');
+        if (empty($expireValue)) {
+            return true;
+        }
 
-        if (\is_object($expire)) {
+        $expire = $this->ipexDateTimeToDateTime($expireValue);
+
+        if ($expire instanceof \DateTime) {
             $tdiff = $expire->getTimestamp() - time();
         } else {
             $tdiff = 0;
@@ -87,14 +95,20 @@ class Token extends ApiClient
         return $tdiff < 5;
     }
 
+    /**
+     * Obtain a new token from the API.
+     *
+     * @return array|bool
+     * @throws \Ease\Exception
+     */
     public function getToken(): array|bool
     {
         if (empty($this->user)) {
-            throw new \Ease\Exception(_('Username not set!'));
+            throw new \Ease\Exception('Username not set!');
         }
 
         if (empty($this->password)) {
-            throw new \Ease\Exception(_('Password not set!'));
+            throw new \Ease\Exception('Password not set!');
         }
 
         $this->setPostFields(json_encode(['username' => $this->user, 'password' => $this->password]));
@@ -103,14 +117,14 @@ class Token extends ApiClient
     }
 
     /**
-     * Pri vytvareni objektu pomoci funkce singleton (ma stejne parametry, jako konstruktor)
-     * se bude v ramci behu programu pouzivat pouze jedna jeho Instance (ta prvni).
+     * Implements the singleton pattern. When creating an object using this function,
+     * only one instance of it (the first one) will be used throughout the program's execution.
      *
-     * @see   http://docs.php.net/en/language.oop5.patterns.html Dokumentace a priklad
+     * @see http://docs.php.net/en/language.oop5.patterns.html
      *
      * @return self
      */
-    public static function singleton()
+    public static function singleton(): self
     {
         if (!isset(self::$_instance)) {
             $class = __CLASS__;
@@ -121,14 +135,15 @@ class Token extends ApiClient
     }
 
     /**
-     * Vrací se.
+     * Returns the singleton instance of the Token class.
      *
-     * @return Shared
+     * @return self
      */
-    public static function &instanced()
+    public static function &instanced(): self
     {
-        $tokener = self::singleton();
-
-        return $tokener;
+        if (!isset(self::$_instance)) {
+            self::$_instance = self::singleton();
+        }
+        return self::$_instance;
     }
 }
