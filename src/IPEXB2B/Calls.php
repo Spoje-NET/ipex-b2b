@@ -16,49 +16,72 @@ declare(strict_types=1);
 namespace IPEXB2B;
 
 use DateTime;
-use Ease\Functions;
 
 /**
- * List of calls made.
+ * This class handles operations related to calls.
  *
  * @url https://restapi.ipex.cz/documentation#!/v1%2Fcalls/getV1Calls
  */
 class Calls extends ApiClient
 {
     /**
-     * API Section used by object.
+     * The API section for calls.
      */
-    public string $section = 'calls';
+    public string $section = 'v1/calls';
 
     /**
-     * Obtain calls listing for give phone number.
+     * Get a list of calls for a specific phone number.
      *
-     * @param DateTime $dateFrom Start Day of results
-     * @param string    $telNo
+     * @param DateTime $dateFrom The start date for the call list.
+     * @param string   $number   The phone number to retrieve calls for.
+     * @param array    $params   Additional parameters for the request.
      *
-     * @return array
+     * @return array|bool An array of call data or false on failure.
      */
-    public function getCallsForNumber(DateTime $dateFrom, string $telNo): array|bool
+    public function getCallsForNumber(DateTime $dateFrom, string $number, array $params = []): array|bool
     {
-        return $this->requestData(Functions::addUrlParams(
-            '',
-            ['number' => $telNo, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)],
-        ));
+        $params['number'] = $number;
+        $params['dateFrom'] = self::dateTimeToIpexDate($dateFrom);
+        $this->setUrlParams($params);
+        return $this->requestData();
     }
 
     /**
-     * Obtain call list for customer.
+     * Get a list of calls for a specific customer.
      *
-     * @param DateTime $dateFrom   Start Day of results
-     * @param int       $customerId
+     * @param DateTime $dateFrom   The start date for the call list.
+     * @param int      $customerId The ID of the customer.
+     * @param array    $params     Additional parameters for the request.
      *
-     * @return array
+     * @return array|bool An array of call data or false on failure.
      */
-    public function getCallsForCustomer(DateTime $dateFrom, int $customerId): array|bool
+    public function getCallsForCustomer(DateTime $dateFrom, int $customerId, array $params = []): array|bool
     {
-        return $this->requestData(Functions::addUrlParams(
-            '',
-            ['customerId' => $customerId, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)],
-        ));
+        $params['customerId'] = $customerId;
+        $params['dateFrom'] = self::dateTimeToIpexDate($dateFrom);
+        $this->setUrlParams($params);
+        return $this->requestData();
+    }
+
+    /**
+     * Get a technical overview of calls.
+     *
+     * @param array $params Optional parameters:
+     *                      - 'number' (string): The phone number to filter by.
+     *                      - 'dateFrom' (DateTime): The start date for the overview.
+     *                      - 'dateTo' (DateTime): The end date for the overview.
+     *
+     * @return array|bool An array of technical overview data or false on failure.
+     */
+    public function getTechnicalOverview(array $params = []): array|bool
+    {
+        if (isset($params['dateFrom']) && $params['dateFrom'] instanceof DateTime) {
+            $params['dateFrom'] = self::dateTimeToIpexDate($params['dateFrom']);
+        }
+        if (isset($params['dateTo']) && $params['dateTo'] instanceof DateTime) {
+            $params['dateTo'] = self::dateTimeToIpexDate($params['dateTo']);
+        }
+        $this->setUrlParams($params);
+        return $this->requestData('technical-overview');
     }
 }

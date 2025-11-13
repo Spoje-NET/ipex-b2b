@@ -21,8 +21,8 @@
     "autoload-dev": {
         "psr-4": {
             "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
-            "Test\\IPEXB2B\\": "testing/src/IPEXB2B/",
-            "Test\\": "testing/"
+            "Test\\IPEXB2B\\": "tests/src/IPEXB2B/",
+            "Test\\": "tests/"
         }
     },
     "require-dev": {
