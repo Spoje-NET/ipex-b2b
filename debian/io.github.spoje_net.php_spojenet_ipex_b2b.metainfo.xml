@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.spoje_net.php_spojenet_ipex_b2b</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>php-spojenet-ipex-b2b</name>
+  <summary>PHP Based IPEX B2B RestAPI/Json library</summary>
+  <description>
+    <p>
+      Allow you perform read and write operations on VoIP system IPEX
+    </p>
+  </description>
+  <categories>
+    <category>Utility</category>
+  </categories>
+  <url type="homepage">https://github.com/Spoje-NET/ipex-b2b</url>
+  <url type="bugtracker">https://github.com/Spoje-NET/ipex-b2b/issues</url>
+  <developer id="io.github.spoje_net">
+    <name>Spoje.Net</name>
+  </developer>
+  <content_rating type="oars-1.1"/>
+</component>
