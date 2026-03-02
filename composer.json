@@ -1,40 +1,41 @@
 {
-    "name": "spojenet/ipexb2b",
-    "description": "PHP Based Library for easy interaction with IPEX.cz JSON api",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Vítězslav Dvořák",
-            "email": "vitex@arachne.cz"
-        }
-    ],
-    "require": {
-        "php": ">=8.0",
-        "ext-curl": "*",
-        "vitexsoftware/ease-core": "^1.49"
-    },
-    "autoload": {
-        "psr-4": {
-            "IPEXB2B\\": "src/IPEXB2B/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
-            "Test\\IPEXB2B\\": "testing/src/IPEXB2B/",
-            "Test\\": "testing/"
-        }
-    },
-    "require-dev": {
-        "phpunit/phpunit": "*",
-        "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "^3.92",
-        "ergebnis/composer-normalize": "^2.48",
-        "ergebnis/php-cs-fixer-config": "^6.58"
-    },
-    "config": {
-        "allow-plugins": {
-            "ergebnis/composer-normalize": true
-        }
+  "name": "spojenet/ipexb2b",
+  "description": "PHP Based Library for easy interaction with IPEX.cz JSON api",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vítězslav Dvořák",
+      "email": "vitex@arachne.cz"
     }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "ext-curl": "*",
+    "vitexsoftware/ease-core": "^1.49"
+  },
+  "autoload": {
+    "psr-4": {
+      "IPEXB2B\\": "src/IPEXB2B/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
+      "Test\\IPEXB2B\\": "testing/src/IPEXB2B/",
+      "Test\\": "testing/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "phpstan/phpstan": "*",
+    "friendsofphp/php-cs-fixer": "^3.89",
+    "ergebnis/composer-normalize": "^2.48",
+    "ergebnis/php-cs-fixer-config": "^6.56"
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    }
+  },
+  "type": "library"
 }

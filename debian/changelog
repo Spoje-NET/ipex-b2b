@@ -1,6 +1,7 @@
-php-spojenet-ipex-b2b (1.2.0) UNRELEASED; urgency=medium
+php-spojenet-ipex-b2b (1.2.0) unstable; urgency=medium
 
   * moderinized
+  * Modernize Debian packaging: debhelper-compat 13, pkg-php-tools, phpab
 
  -- vitex <info@vitexsoftware.cz>  Mon, 23 Dec 2024 00:00:00 +0100
 
