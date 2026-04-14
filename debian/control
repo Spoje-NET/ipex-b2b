@@ -3,7 +3,7 @@ Section: php
 Priority: optional
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
-Build-Depends: debhelper-compat (= 13), pkg-php-tools (>= 1.7~), phpab, jq, moreutils
+Build-Depends: debhelper-compat (= 13), pkg-php-tools (>= 1.7~), jq, moreutils
 Standards-Version: 4.7.0
 Homepage: https://github.com/Spoje-NET/ipex-b2b
 Rules-Requires-Root: no

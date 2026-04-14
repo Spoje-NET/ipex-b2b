@@ -7,9 +7,9 @@ override_dh_auto_test:
 	echo tests temporarly skipped for now in rules file
 
 override_dh_install:
-	# Generate autoloader
-	phpab --output src/IPEXB2B/autoload.php --basedir src/IPEXB2B src/IPEXB2B
 	dh_install
+	# Install the static autoloader
+	install -D -m 0644 debian/autoload.php debian/php-spojenet-ipex-b2b/usr/share/php/IPEXB2B/autoload.php
 	# Register with pkg-php-tools
 	install -m0755 -d debian/php-spojenet-ipex-b2b/usr/share/pkg-php-tools/autoloaders
 	echo 'deb ipexb2b IPEXB2B/autoload.php' > debian/php-spojenet-ipex-b2b/usr/share/pkg-php-tools/autoloaders/php-spojenet-ipex-b2b
