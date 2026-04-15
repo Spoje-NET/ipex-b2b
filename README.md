@@ -5,11 +5,11 @@
 
 CZ: PHP Knihovna pro snadnou práci s Rest API [IPEX B2B](https://restapi.ipex.cz/documentation)
 
-[![Source Code](http://img.shields.io/badge/source/Spoje-NET/ipex-b2b-blue.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b)
+[![Source Code](https://img.shields.io/badge/source/Spoje-NET/ipex-b2b-blue.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b)
 [![Latest Version](https://img.shields.io/github/release/Spoje-NET/ipex-b2b.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b/releases)
-[![Software License](https://img.shields.io/badge/license-GNU-brightgreen.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b/blob/master/LICENSE)
-[![Total Downloads](https://img.shields.io/packagist/dt/spoje.net/ipex-b2b.svg?style=flat-square)](https://packagist.org/packages/spoje.net/ipex-b2b)
-[![Latest stable](https://img.shields.io/packagist/v/spoje.net/ipex-b2b.svg?style=flat-square)](https://packagist.org/packages/spoje.net/ipex-b2b)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/Spoje-NET/ipex-b2b/blob/master/LICENSE)
+[![Total Downloads](https://img.shields.io/packagist/dt/spojenet/ipexb2b.svg?style=flat-square)](https://packagist.org/packages/spojenet/ipexb2b)
+[![Latest stable](https://img.shields.io/packagist/v/spojenet/ipexb2b.svg?style=flat-square)](https://packagist.org/packages/spojenet/ipexb2b)
 
 # Poděkování 
 Vznik této knihovny by nebyl možný bez laskavé podpory společnosti [Spoje.Net](http://www.spoje.net), 
