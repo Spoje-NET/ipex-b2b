@@ -49,7 +49,7 @@ class ApiClient extends Brick
     public string $apiURL;
 
     /**
-    * Data block in response field.
+     * Data block in response field.
      */
     public string $resultField = 'results';
 
@@ -62,6 +62,7 @@ class ApiClient extends Brick
 
     /**
      * Default communication format.
+     *
      * @var string json
      */
     public string $format = 'json';
@@ -75,10 +76,8 @@ class ApiClient extends Brick
 
     /**
      * Curl Handle.
-     *
-     * @var \CurlHandle
      */
-    public $curl;
+    public ?\CurlHandle $curl = null;
 
     /**
      * Server[:port].
@@ -189,8 +188,7 @@ class ApiClient extends Brick
      *
      * @see https://www.ipex.eu/api/dokumentace/ref/urls/ Všechny podporované parametry
      */
-    public array $urlParams = [
-    ];
+    public array $urlParams = [];
 
     /**
      * Body data  for next curl POST operation.
@@ -215,8 +213,8 @@ class ApiClient extends Brick
     /**
      * Class for read only interaction with IPEX.
      *
-     * @param mixed $init    default record id or initial data
-     * @param array<string,string> $options Connection settings override
+     * @param mixed                 $init    default record id or initial data
+     * @param array<string, string> $options Connection settings override
      */
     public function __construct(string $init = '', array $options = [])
     {
@@ -232,6 +230,8 @@ class ApiClient extends Brick
         if (!empty($init)) {
             $this->processInit($init);
         }
+
+        $this->setObjectName();
     }
 
     /**
@@ -277,7 +277,7 @@ class ApiClient extends Brick
      * @param string $prefix banner prefix text
      * @param string $suffix banner suffix text
      */
-    public function logBanner(/*string*/ $prefix = '',/*string*/ $suffix = ''): void
+    public function logBanner(/* string */ $prefix = '', /* string */ $suffix = ''): void
     {
         parent::logBanner(
             $prefix,
@@ -291,8 +291,6 @@ class ApiClient extends Brick
 
     /**
      * Return URL of used API.
-     *
-     * @return string
      */
     public function getApiUrl(): string
     {
@@ -463,9 +461,7 @@ class ApiClient extends Brick
             $this->urlParams,
         ), $method, $format);
 
-        return \strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray(
-            $this->lastCurlResponse,
-        ), $responseCode) : null;
+        return \strlen($this->lastCurlResponse) ? $this->parseResponse($this->rawResponseToArray($this->lastCurlResponse), $responseCode) : null;
     }
 
     /**
@@ -679,11 +675,11 @@ class ApiClient extends Brick
      *
      * @param string $ipexdatetime ( 2017-09-21T18:02:44.120Z )
      *
-     * @return DateTime|false
+     * @return \DateTime|false
      */
     public static function ipexDateTimeToDateTime($ipexdatetime)
     {
-        return DateTime::createFromFormat(
+        return \DateTime::createFromFormat(
             '!Y-m-d H:i:s.u',
             str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)),
         );
@@ -692,7 +688,7 @@ class ApiClient extends Brick
     /**
      * Return Day in IpexAPI format.
      *
-     * @param DateTime $dateTime
+     * @param \DateTime $dateTime
      *
      * @return string
      */
@@ -732,7 +728,7 @@ class ApiClient extends Brick
      */
     public function disconnect(): void
     {
-        if (\is_resource($this->curl)) {
+        if ($this->curl instanceof \CurlHandle) {
             curl_close($this->curl);
         }
 

@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace IPEXB2B;
 
-use DateTime;
 use Ease\Functions;
 
 /**
@@ -33,12 +32,11 @@ class Calls extends ApiClient
     /**
      * Obtain calls listing for give phone number.
      *
-     * @param DateTime $dateFrom Start Day of results
-     * @param string    $telNo
+     * @param \DateTime $dateFrom Start Day of results
      *
      * @return array
      */
-    public function getCallsForNumber(DateTime $dateFrom, string $telNo): array|bool
+    public function getCallsForNumber(\DateTime $dateFrom, string $telNo): array|bool
     {
         return $this->requestData(Functions::addUrlParams(
             '',
@@ -49,12 +47,11 @@ class Calls extends ApiClient
     /**
      * Obtain call list for customer.
      *
-     * @param DateTime $dateFrom   Start Day of results
-     * @param int       $customerId
+     * @param \DateTime $dateFrom Start Day of results
      *
      * @return array
      */
-    public function getCallsForCustomer(DateTime $dateFrom, int $customerId): array|bool
+    public function getCallsForCustomer(\DateTime $dateFrom, int $customerId): array|bool
     {
         return $this->requestData(Functions::addUrlParams(
             '',

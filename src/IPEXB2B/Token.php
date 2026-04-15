@@ -36,8 +36,8 @@ class Token extends ApiClient
     /**
      * Token.
      *
-     * @param mixed $init
-     * @param array<string,string> $options
+     * @param mixed                 $init
+     * @param array<string, string> $options
      */
     public function __construct($init = '', $options = [])
     {

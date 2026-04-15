@@ -46,18 +46,16 @@ class ApiClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetUp(): void
     {
-        $this->object->setUp(
-            [
-                'url' => 'url',
-                'user' => 'usr',
-                'password' => 'pwd',
-                'section' => 'sec',
-                'debug' => true,
-                'defaultUrlParams' => ['limit' => 10],
-                'ignore404' => true,
-                'offline' => true,
-            ],
-        );
+        $this->object->setUp([
+            'url' => 'url',
+            'user' => 'usr',
+            'password' => 'pwd',
+            'section' => 'sec',
+            'debug' => true,
+            'defaultUrlParams' => ['limit' => 10],
+            'ignore404' => true,
+            'offline' => true,
+        ],);
         $this->assertEquals('url', $this->object->url);
         $this->assertEquals('usr', $this->object->user);
         $this->assertEquals('sec', $this->object->section);
