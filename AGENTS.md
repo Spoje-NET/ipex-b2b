@@ -1,74 +1,106 @@
-# WARP.md - Working AI Reference for ipex-b2b
+# AGENTS.md - Working AI Reference for ipex-b2b
 
 ## Project Overview
-**Type**: PHP Project/Debian Package
-**Purpose**: ![Ipex-b2b Logo](https://github.com/Spoje-NET/Ipex-b2b/raw/master/ipex-b2b-logo.png "Project Logo")
-**Status**: Active
-**Repository**: git@github.com:Spoje-NET/ipex-b2b.git
+**Type**: PHP Library / Debian Package  
+**Purpose**: PHP client library for the [IPEX B2B REST API](https://restapi.ipex.cz/documentation) — enables read/write operations on the IPEX VoIP system (customers, calls, services, SIM cards, rights, tokens)  
+**License**: MIT  
+**Status**: Active  
+**Repository**: https://github.com/Spoje-NET/ipex-b2b  
+**Packagist**: `spojenet/ipexb2b`  
+**Debian package**: `php-spojenet-ipex-b2b`  
+**Current version**: 1.2.0
 
 ## Key Technologies
-- PHP
-- Composer
-- Debian Packaging
+- PHP >= 8.0 (ext-curl required)
+- [vitexsoftware/ease-core](https://github.com/VitexSoftware/ease-core) — logging, base `Brick` class
+- Composer (PSR-4 autoloading, namespace `IPEXB2B\`)
+- Debian packaging (`debhelper-compat 13`, `pkg-php-tools`)
+- PHPUnit, PHPStan, php-cs-fixer
 
-## Architecture & Structure
+## Repository Structure
 ```
 ipex-b2b/
-├── src/           # Source code
-├── tests/         # Test files
-├── docs/          # Documentation
-└── ...
+├── src/IPEXB2B/          # Library source (PSR-4, namespace IPEXB2B\)
+│   ├── ApiClient.php     # Base cURL/REST client; all sections extend this
+│   ├── Token.php         # Bearer-token authentication
+│   ├── Calls.php         # /calls section
+│   ├── Customers.php     # /customers section
+│   ├── Rights.php        # /rights section
+│   ├── Services.php      # /services section
+│   └── Voip.php          # /voip section (credit top-up, numbers)
+├── tests/src/IPEXB2B/    # PHPUnit tests
+│   ├── ApiClientTest.php
+│   └── CallsTest.php
+├── Examples/             # Runnable usage examples
+├── debian/               # Debian packaging files
+│   ├── control           # Package metadata
+│   ├── autoload.php      # Static Debian autoloader (replaces phpab/composer-debian)
+│   ├── Jenkinsfile       # CI pipeline
+│   └── Jenkinsfile.release
+├── composer.json         # Package: spojenet/ipexb2b
+├── phpunit.xml
+├── phpstan-default.neon.dist
+└── Makefile
+```
+
+## Configuration
+
+Set via PHP constants or pass as `$options` array to the constructor:
+
+```php
+define('IPEX_URL',      'https://restapi.ipex.cz');
+define('IPEX_LOGIN',    'firma_api');
+define('IPEX_PASSWORD', 'secret');
+```
+
+Constructor options override constants:
+
+```php
+$client = new \IPEXB2B\Rights(null, [
+    'url'      => 'https://testapi.ipex.cz',
+    'user'     => 'resttest',
+    'password' => 'secret',
+]);
 ```
 
 ## Development Workflow
 
-### Prerequisites
-- Development environment setup
-- Required dependencies
-
-### Setup Instructions
+### Setup
 ```bash
-# Clone the repository
-git clone git@github.com:Spoje-NET/ipex-b2b.git
-cd ipex-b2b
-
-# Install dependencies
 composer install
-```
-
-### Build & Run
-```bash
-dpkg-buildpackage -b -uc
 ```
 
 ### Testing
 ```bash
-composer test
+make tests
+# or
+vendor/bin/phpunit tests
 ```
 
-## Key Concepts
-- **Main Components**: Core functionality and modules
-- **Configuration**: Configuration files and environment variables
-- **Integration Points**: External services and dependencies
+### Static Analysis
+```bash
+make static-code-analysis
+# regenerate baseline:
+make static-code-analysis-baseline
+```
 
-## Common Tasks
+### Code Style
+```bash
+make cs   # runs php-cs-fixer
+```
 
-### Development
-- Review code structure
-- Implement new features
-- Fix bugs and issues
+### Debian Build
+```bash
+dpkg-buildpackage -b -uc
+```
 
-### Deployment
-- Build and package
-- Deploy to target environment
-- Monitor and maintain
+## Architecture Notes
 
-## Troubleshooting
-- **Common Issues**: Check logs and error messages
-- **Debug Commands**: Use appropriate debugging tools
-- **Support**: Check documentation and issue tracker
+- `ApiClient` extends `Ease\Brick` and uses the `Ease\Logger\Logging` trait.
+- Authentication is token-based (`Token` class, singleton via `Token::instanced()`). The token is injected as an `Authorization` header on every request.
+- Subclasses set `$this->section` to the API path segment (e.g. `'voip'`, `'customers'`). `getSectionURL()` builds `{url}/v1/{section}`.
+- `requestData($urlSuffix, $method, $format)` is the main entry point for all HTTP calls.
+- The Debian autoloader (`debian/autoload.php`) is a static file — do **not** regenerate it with `phpab` or `composer-debian`.
 
-## Additional Notes
-- Project-specific conventions
-- Development guidelines
-- Related documentation
+## API Documentation
+- REST API reference: https://restapi.ipex.cz/documentation
