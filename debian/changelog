@@ -1,9 +1,15 @@
+php-spojenet-ipex-b2b (1.2.1) UNRELEASED; urgency=medium
+
+  * composer versioning fix
+
+ -- vitex <info@vitexsoftware.cz>  Fri, 01 May 2026 23:11:46 +0200
+
 php-spojenet-ipex-b2b (1.2.0) unstable; urgency=medium
 
   * moderinized
   * Modernize Debian packaging: debhelper-compat 13, pkg-php-tools, phpab
 
- -- vitex <info@vitexsoftware.cz>  Mon, 23 Dec 2024 00:00:00 +0100
+ -- vitex <info@vitexsoftware.cz>  Fri, 01 May 2026 23:11:28 +0200
 
 php-spojenet-ipex-b2b (1.1) unstable; urgency=low
 
