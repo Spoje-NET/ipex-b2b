@@ -1,2 +1,4 @@
 src/IPEXB2B/*.php           /usr/share/php/IPEXB2B
 debian/composer.json        /usr/share/php/IPEXB2B
+php-spojenet-ipex-b2b.svg	usr/share/icons/hicolor/scalable/apps/
+io.github.spoje_net.php_spojenet_ipex_b2b.metainfo.xml	usr/share/metainfo/
