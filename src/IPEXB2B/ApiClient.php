@@ -374,7 +374,8 @@ class ApiClient extends Brick
      */
     public function getSectionURL()
     {
-        $sectionUrl = $this->url.'/'.$this->protoVersion.'/';
+        $prefix = empty($this->protoVersion) ? '' : $this->protoVersion.'/';
+        $sectionUrl = $this->url.'/'.$prefix;
         $section = $this->getSection();
 
         if (!empty($section)) {
@@ -448,9 +449,9 @@ class ApiClient extends Brick
     ) {
         $this->rowCount = null;
 
-        if (preg_match('/^http/', $urlSuffix)) {
+        if (\is_string($urlSuffix) && preg_match('/^http/', $urlSuffix)) {
             $url = $urlSuffix;
-        } elseif (!\is_int($urlSuffix) && \strlen($urlSuffix) && ($urlSuffix[0] === '/')) {
+        } elseif (!\is_int($urlSuffix) && \is_string($urlSuffix) && \strlen($urlSuffix) && ($urlSuffix[0] === '/')) {
             $url = $this->url.$urlSuffix;
         } else {
             $url = $this->sectionUrlWithSuffix($urlSuffix);
@@ -637,7 +638,9 @@ class ApiClient extends Brick
      */
     public function loadFromIPEX($key)
     {
-        return $this->takeData($this->requestData(\is_array($key) ? Functions::addUrlParams('', $key) : $key));
+        $data = $this->requestData(\is_array($key) ? Functions::addUrlParams('', $key) : $key);
+
+        return \is_array($data) ? $this->takeData($data) : 0;
     }
 
     /**
@@ -679,9 +682,14 @@ class ApiClient extends Brick
      */
     public static function ipexDateTimeToDateTime($ipexdatetime)
     {
+        if (empty($ipexdatetime)) {
+            return false;
+        }
+
         return \DateTime::createFromFormat(
             '!Y-m-d H:i:s.u',
-            str_replace('Z', '', str_replace('T', ' ', $ipexdatetime)),
+            str_replace('Z', '', str_replace('T', ' ', (string) $ipexdatetime)),
+            new \DateTimeZone('UTC'),
         );
     }
 
