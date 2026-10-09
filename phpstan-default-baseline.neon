@@ -1,2 +1,223 @@
 parameters:
 	ignoreErrors:
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Call to function is_int\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 2
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:logResult\(\) has parameter \$resultData with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:parseError\(\) has parameter \$responseDecoded with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:parseResponse\(\) has parameter \$responseDecoded with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:parseResponse\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:rawResponseToArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:requestData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:setSection\(\) should return bool but returns null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:setUp\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:setUrlParams\(\) has parameter \$urlParams with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Method IPEXB2B\\ApiClient\:\:setUrlParams\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$init with type mixed is not subtype of native type string\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Parameter \#3 \$value of function curl_setopt expects 0\|2, false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Parameter \#3 \$value of function curl_setopt expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Property IPEXB2B\\ApiClient\:\:\$actionsAvailable type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Property IPEXB2B\\ApiClient\:\:\$codes type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Property IPEXB2B\\ApiClient\:\:\$curlInfo type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Property IPEXB2B\\ApiClient\:\:\$defaultHttpHeaders type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Property IPEXB2B\\ApiClient\:\:\$defaultUrlParams type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Property IPEXB2B\\ApiClient\:\:\$lastResult type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Property IPEXB2B\\ApiClient\:\:\$urlParams type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Result of method IPEXB2B\\ApiClient\:\:updateApiURL\(\) \(void\) is used\.$#'
+			identifier: method.void
+			count: 1
+			path: src/IPEXB2B/ApiClient.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 2
+			path: src/IPEXB2B/Calls.php
+
+		-
+			message: '#^Method IPEXB2B\\Calls\:\:getCallsForCustomer\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/Calls.php
+
+		-
+			message: '#^Method IPEXB2B\\Calls\:\:getCallsForNumber\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/Calls.php
+
+		-
+			message: '#^Parameter \#2 \$addParams of static method Ease\\Functions\:\:addUrlParams\(\) expects array\<string, string\>, array\<string, int\|string\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/IPEXB2B/Calls.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/IPEXB2B/Token.php
+
+		-
+			message: '#^Method IPEXB2B\\Token\:\:getToken\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IPEXB2B/Token.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 2
+			path: tests/src/IPEXB2B/ApiClientTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertIsInt\(\) with int will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/src/IPEXB2B/ApiClientTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertIsString\(\) with string will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 3
+			path: tests/src/IPEXB2B/ApiClientTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with array\|bool will always evaluate to false\.$#'
+			identifier: method.impossibleType
+			count: 1
+			path: tests/src/IPEXB2B/ApiClientTest.php
+
+		-
+			message: '#^Call to function is_bool\(\) with bool will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: tests/src/IPEXB2B/CallsTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 2
+			path: tests/src/IPEXB2B/CallsTest.php

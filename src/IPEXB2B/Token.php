@@ -52,7 +52,9 @@ class Token extends ApiClient
      */
     public function refreshToken()
     {
-        return $this->setData($this->getToken()) === 2;
+        $tokenData = $this->getToken();
+
+        return \is_array($tokenData) ? $this->setData($tokenData) === 2 : false;
     }
 
     /**
@@ -66,7 +68,7 @@ class Token extends ApiClient
             $this->refreshToken();
         }
 
-        return $this->getDataValue('accessToken');
+        return (string) $this->getDataValue('accessToken');
     }
 
     /**
@@ -99,7 +101,7 @@ class Token extends ApiClient
 
         $this->setPostFields(json_encode(['username' => $this->user, 'password' => $this->password]));
 
-        return $this->requestData('', 'POST');
+        return $this->requestData('', 'POST') ?? false;
     }
 
     /**
@@ -123,7 +125,7 @@ class Token extends ApiClient
     /**
      * Vrací se.
      *
-     * @return Shared
+     * @return self
      */
     public static function &instanced()
     {

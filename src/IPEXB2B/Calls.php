@@ -41,7 +41,7 @@ class Calls extends ApiClient
         return $this->requestData(Functions::addUrlParams(
             '',
             ['number' => $telNo, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)],
-        ));
+        )) ?? false;
     }
 
     /**
@@ -56,6 +56,6 @@ class Calls extends ApiClient
         return $this->requestData(Functions::addUrlParams(
             '',
             ['customerId' => $customerId, 'dateFrom' => ApiClient::dateTimeToIpexDate($dateFrom)],
-        ));
+        )) ?? false;
     }
 }
